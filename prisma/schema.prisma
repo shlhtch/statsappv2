@@ -18,8 +18,8 @@ model users {
   isAuth     Boolean  @default(false)
   name       String?
   telegramId String   @unique
-  team       teams?   @relation(fields: [teamId], references: [id])
-  teamId     Int?
+  team       teams?   @relation(fields: [team_id], references: [id])
+  team_id     Int?
   stats      stats[]
   created_at DateTime @default(now())
   updated_at DateTime? @updatedAt
