@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id         Int      @id @default(autoincrement())
+  isAuth     Boolean  @default(false)
+  name       String?
+  telegramId String   @unique
+  team       teams?   @relation(fields: [teamId], references: [id])
+  teamId     Int?
+  stats      stats[]
+  created_at DateTime @default(now())
+  updated_at DateTime? @updatedAt
+  role       Role     @default(MANAGER)
+}
+
+model teams {
+  id         Int     @default(autoincrement()) @id
+  title      String  @unique
+  members    users[]
+}
+
+model stats {
+  id         Int      @id @default(autoincrement())
+  date       DateTime @db.Date
+  user_id    Int
+  deposits   Int @default(0)
+  redeposits Int @default(0)
+  tir1       Int @default(0)
+  tir2       Int? @default(0)
+  comment    String?
+  firstvalue  Int?     @default(0)
+  secondvalue Int?     @default(0)
+  thirdvalue  Int?     @default(0)
+  fourthvalue Int?     @default(0)
+  fifthvalue  Int?     @default(0)
+  firtsminus  Int?     @default(0)
+  secondminus Int?     @default(0)
+  thirdminus  Int?     @default(0)
+  totals      Int?     @default(0)
+  user        users    @relation(fields: [user_id], references: [id])
+  created_at  DateTime @default(now())
+  updated_at DateTime? @updatedAt
+
+  @@unique([user_id, date])
+}
+
+
+enum Role {
+  ADMIN
+  TEAMLEAD
+  MANAGER
+}
