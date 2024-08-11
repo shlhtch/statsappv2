@@ -12,6 +12,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
         name: true,
         isAuth: true,
         role: true,
+        team_id: true
       },
     });
 
@@ -19,7 +20,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ message: 'У вас нет доступа' }, { status: 403 });
     }
 
-    const message = `${user.name} | ${user.role}`;
+    const message = `${user.name} | ${user.role} | ${user.team_id}`;
     return NextResponse.json({ message }, { status: 200 });
 
   } catch (error) {

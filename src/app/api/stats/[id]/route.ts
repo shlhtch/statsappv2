@@ -8,12 +8,32 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const { id } = params;
+
   try {
-    const teams = await prisma.stats.findUnique({
-      where: { id: parseInt(id) },
+    const user = await prisma.users.findUnique({
+      where: { telegramId: id },
+      select: { team_id: true },
     });
-    return NextResponse.json(teams);
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "Пользователь не найден" },
+        { status: 404 }
+      );
+    }
+
+    const stats = await prisma.stats.findMany({
+      where: {
+        user: {
+          team_id: user.team_id
+
+        },
+      },
+    });
+
+    return NextResponse.json(stats);
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Ошибка при получении отчета" },
       { status: 500 }

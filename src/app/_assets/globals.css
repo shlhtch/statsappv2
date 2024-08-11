@@ -5,3 +5,8 @@
 body {
   background: var(--tg-theme-secondary-bg-color, white);
 }
+
+body.manager-bg {
+  background: #f0f0f0;
+  /* Другие стили для страницы /managers */
+}

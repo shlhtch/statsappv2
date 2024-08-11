@@ -1,0 +1,39 @@
+body.managerbgTMNT {
+  background-image: url('/TMNT.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-color: #130D25;
+}
+
+body.managerbgDH {
+  background-image: url('/DH.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-color: #130D25;
+}
+
+body.managerbgHFM {
+  background-image: url('/HFM.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-color: #130D25;
+}
+
+body.managerbgBMC {
+  background-image: url('/BMC.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-color: #130D25;
+}
+
+body.managerbgPNX {
+  background-image: url('/PNX.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-color: #130D25;
+}
