@@ -72,6 +72,23 @@ export function TeamTotalStat() {
     fetchTeamData();
   }, [id, userTeam]);
 
+  const bgColor = () => {
+    switch (userTeam) {
+      case "1":
+        return "bg-[#CFA3F2]";
+      case "2":
+        return "bg-[#29B298]";
+      case "3":
+        return "bg-[#CB4E07]";
+      case "4":
+        return "bg-[#0052B3]";
+      case "5":
+        return "bg-[#8D7F7B]";
+      default:
+        return "bg-[#AE0900]";
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -88,23 +105,51 @@ export function TeamTotalStat() {
   return (
     <div>
       {teamData ? (
-        <div className="mt-5 font-montserratAlternates">
+        <div className="py-7 font-montserratAlternates">
           <h1 className="text-center font-extrabold text-[24px]">
             {teamData.previousDate}
           </h1>
-          <h1 className="ml-5 mt-52 font-semibold text-[20px]">
+          <h1 className="px-5 mt-48 font-semibold text-[20px]">
             {teamData.title}
           </h1>
           <ul>
             {teamData.members.map((member, index) => (
-              <li key={index} className="ml-5 mt-2 font-semibold text-[14px]">
+              <li key={index} className="px-5 py-1 font-semibold text-[14px]">
                 Тимлид: {member.name}
               </li>
             ))}
           </ul>
-          <h1 className="ml-5 mt-1 font-semibold text-[14px]">
+          <h1 className="px-5 font-semibold text-[14px]">
             Менеджеры: {teamData.totalMembers}
           </h1>
+          {/* Контейнер для элементов с sample text */}
+          <div className="overflow-auto pb-20" style={{ height: "180px" }}>
+            {" "}
+            {/* Установите нужную высоту */}
+            <div className="grid gap-y-3 gap-x-8 py-1 grid-cols-2 pb-16 px-5 text-black">
+              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+                sample text
+              </h1>
+              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+                sample text
+              </h1>
+              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+                sample text
+              </h1>
+              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+                sample text
+              </h1>
+              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+                sample text
+              </h1>
+              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+                sample text
+              </h1>
+              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+                sample text
+              </h1>
+            </div>
+          </div>
         </div>
       ) : (
         <h1>Информация о команде недоступна</h1>

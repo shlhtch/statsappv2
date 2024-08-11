@@ -4,6 +4,8 @@ body.managerbgTMNT {
   background-repeat: no-repeat;
   background-position: top;
   background-color: #130D25;
+  height: 375px;
+  overflow: hidden;
 }
 
 body.managerbgDH {
@@ -12,6 +14,7 @@ body.managerbgDH {
   background-repeat: no-repeat;
   background-position: top;
   background-color: #130D25;
+  height: 80vh;
 }
 
 body.managerbgHFM {
@@ -20,6 +23,7 @@ body.managerbgHFM {
   background-repeat: no-repeat;
   background-position: top;
   background-color: #130D25;
+  height: 80vh;
 }
 
 body.managerbgBMC {
@@ -28,6 +32,8 @@ body.managerbgBMC {
   background-repeat: no-repeat;
   background-position: top;
   background-color: #130D25;
+  height: 375px;
+  overflow: hidden;
 }
 
 body.managerbgPNX {
@@ -36,4 +42,6 @@ body.managerbgPNX {
   background-repeat: no-repeat;
   background-position: top;
   background-color: #130D25;
+  height: 375px;
+  overflow: hidden;
 }
