@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     }: {
       date: string;
       user_id: number;
-      deposits: number;
+      deposits: number; // может быть 0
       redeposits: number;
       tir1: number;
       tir2: number | null;
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
     if (existingRecord) {
       return NextResponse.json(
         {
-          error: "Запись для для данной даты уже существует",
+          error: "Запись для данной даты уже существует, проверь отчеты",
         },
         { status: 409 }
       );

@@ -6,14 +6,20 @@ import React, { useEffect, useState } from "react";
 const FormControl: React.FC = () => {
   const [date, setDate] = useState("");
   const [userId, setUserId] = useState(0);
-  const [deposits, setDeposits] = useState(0);
-  const [redeposits, setRedeposits] = useState(0);
-  const [tir1, setTir1] = useState(0);
+  const [deposits, setDeposits] = useState<number | null>(null);
+  const [redeposits, setRedeposits] = useState<number | null>(null);
+  const [tir1, setTir1] = useState<number | null>(null);
   const [tir2, setTir2] = useState<number | null>(null);
   const [comment, setComment] = useState("");
-  const router = useRouter(); // Инициализация useRouter
+  const [error, setError] = useState("");
+  const [inputErrors, setInputErrors] = useState({
+    deposits: "",
+    redeposits: "",
+    tir1: "",
+    tir2: "",
+  });
+  const router = useRouter();
 
-  // Используем useEffect для установки сегодняшней даты по умолчанию
   useEffect(() => {
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${String(
@@ -22,8 +28,43 @@ const FormControl: React.FC = () => {
     setDate(formattedDate);
   }, []);
 
+  const validateInputs = () => {
+    const errors = {
+      deposits: "",
+      redeposits: "",
+      tir1: "",
+      tir2: "",
+    };
+
+    if (deposits !== null && deposits < 0)
+      errors.deposits = "Только положительные числа и 0";
+    if (redeposits !== null && redeposits < 0)
+      errors.redeposits = "Только положительные числа и 0";
+    if (tir1 !== null && tir1 < 0)
+      errors.tir1 = "Только положительные числа и 0";
+    if (tir2 !== null && tir2 < 0)
+      errors.tir2 = "Только положительные числа и 0";
+
+    setInputErrors(errors);
+    return Object.values(errors).every((error) => error === "");
+  };
+
+  const handleInputChange = (
+    setter: React.Dispatch<React.SetStateAction<number | null>>,
+    value: string
+  ) => {
+    const numericValue = value === "" ? null : parseFloat(value);
+    setter(numericValue);
+    validateInputs();
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setError("");
+    setInputErrors({ deposits: "", redeposits: "", tir1: "", tir2: "" });
+    if (!validateInputs()) {
+      return;
+    }
 
     const payload = {
       date,
@@ -34,7 +75,6 @@ const FormControl: React.FC = () => {
       tir2,
       comment,
     };
-
     try {
       const response = await fetch("/api/stats", {
         method: "POST",
@@ -45,13 +85,14 @@ const FormControl: React.FC = () => {
       });
 
       if (!response.ok) {
+        const result = await response.json();
+        if (response.status === 409) {
+          setError(result.error || "Конфликт данных!");
+        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
       const result = await response.json();
       console.log("Response:", result);
-
-      // Перенаправление на страницу /manager/stats после успешного создания
       router.push("/manager/stats");
     } catch (error) {
       console.error("Error:", error);
@@ -75,6 +116,7 @@ const FormControl: React.FC = () => {
             onChange={(e) => setDate(e.target.value)}
             className="w-full p-2 rounded-md bg-[#2F313B] text-white border border-gray-600"
           />
+          {error && <p className="text-red-500 mt-1">{error}</p>}{" "}
         </div>
         <div>
           <label className="block text-white mb-2">User ID:</label>
@@ -89,45 +131,63 @@ const FormControl: React.FC = () => {
           <label className="block text-white mb-2">Депозиты:</label>
           <input
             type="number"
-            value={deposits}
-            onChange={(e) => setDeposits(Number(e.target.value))}
-            className="w-full p-2 rounded-md bg-[#2F313B] text-white border border-gray-600"
+            value={deposits === null ? "" : deposits}
+            onChange={(e) => handleInputChange(setDeposits, e.target.value)}
+            className={`w-full p-2 rounded-md bg-[#2F313B] text-white border ${
+              inputErrors.deposits ? "border-red-500" : "border-gray-600"
+            }`}
           />
+          {inputErrors.deposits && (
+            <p className="text-red-500 mt-1">{inputErrors.deposits}</p>
+          )}
         </div>
         <div>
           <label className="block text-white mb-2">Редепозиты:</label>
           <input
             type="number"
-            value={redeposits}
-            onChange={(e) => setRedeposits(Number(e.target.value))}
-            className="w-full p-2 rounded-md bg-[#2F313B] text-white border border-gray-600"
+            value={redeposits === null ? "" : redeposits}
+            onChange={(e) => handleInputChange(setRedeposits, e.target.value)}
+            className={`w-full p-2 rounded-md bg-[#2F313B] text-white border ${
+              inputErrors.redeposits ? "border-red-500" : "border-gray-600"
+            }`}
           />
+          {inputErrors.redeposits && (
+            <p className="text-red-500 mt-1">{inputErrors.redeposits}</p>
+          )}
         </div>
         <div>
           <label className="block text-white mb-2">TIR 1:</label>
           <input
             type="number"
-            value={tir1}
-            onChange={(e) => setTir1(Number(e.target.value))}
-            className="w-full p-2 rounded-md bg-[#2F313B] text-white border border-gray-600"
+            value={tir1 === null ? "" : tir1}
+            onChange={(e) => handleInputChange(setTir1, e.target.value)}
+            className={`w-full p-2 rounded-md bg-[#2F313B] text-white border ${
+              inputErrors.tir1 ? "border-red-500" : "border-gray-600"
+            }`}
           />
+          {inputErrors.tir1 && (
+            <p className="text-red-500 mt-1">{inputErrors.tir1}</p>
+          )}
         </div>
         <div>
           <label className="block text-white mb-2">TIR 2:</label>
           <input
             type="number"
             value={tir2 === null ? "" : tir2}
-            onChange={(e) =>
-              setTir2(e.target.value ? Number(e.target.value) : null)
-            }
-            className="w-full p-2 rounded-md bg-[#2F313B] text-white border border-gray-600"
+            onChange={(e) => handleInputChange(setTir2, e.target.value)}
+            className={`w-full p-2 rounded-md bg-[#2F313B] text-white border ${
+              inputErrors.tir2 ? "border-red-500" : "border-gray-600"
+            }`}
           />
+          {inputErrors.tir2 && (
+            <p className="text-red-500 mt-1">{inputErrors.tir2}</p>
+          )}
         </div>
         <div>
           <label className="block text-white mb-2">Комментарий:</label>
-          <input
-            type="text"
+          <textarea
             value={comment}
+            placeholder="Я сегодня накосячил 3 раза. Я сегодня накосячил 3 раза. Я сегодня накосячил 3 раза."
             onChange={(e) => setComment(e.target.value)}
             className="w-full p-2 rounded-md bg-[#2F313B] text-white border border-gray-600"
           />
