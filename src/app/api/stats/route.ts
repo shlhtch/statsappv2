@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     } = await request.json();
 
     const [day, month, year] = date.split("-");
-    const formattedDate = new Date(`${year}-${month}-${day}`);
+    const formattedDate = new Date(`${day}-${month}-${year}`);
 
     if (
       !date ||

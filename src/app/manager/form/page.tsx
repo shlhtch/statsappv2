@@ -5,6 +5,8 @@ import NavBar from "@/components/NavBar";
 
 export default function PointsPage() {
   return (
-    <FormControl/>
+    <div>
+      <FormControl />
+    </div>
   );
 }

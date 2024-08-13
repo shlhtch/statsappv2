@@ -77,9 +77,9 @@ export function TeamTotalStat() {
       case "1":
         return "bg-[#CFA3F2]";
       case "2":
-        return "bg-[#29B298]";
+        return "bg-[#064040]";
       case "3":
-        return "bg-[#CB4E07]";
+        return "bg-[#904636]";
       case "4":
         return "bg-[#0052B3]";
       case "5":
@@ -105,47 +105,44 @@ export function TeamTotalStat() {
   return (
     <div>
       {teamData ? (
-        <div className="py-7 font-montserratAlternates">
-          <h1 className="text-center font-extrabold text-[24px]">
+        <div className="py-5 font-montserratAlternates text-white">
+          <div className="text-center font-extrabold text-[20px]">
             {teamData.previousDate}
-          </h1>
-          <h1 className="px-5 mt-48 font-semibold text-[20px]">
+          </div>
+          <h1 className="px-5 mt-[134px] mb-1 font-semibold text-[20px]">
             {teamData.title}
           </h1>
           <ul>
             {teamData.members.map((member, index) => (
-              <li key={index} className="px-5 py-1 font-semibold text-[14px]">
+              <li key={index} className="px-5 mb-1 font-semibold text-[14px]">
                 Тимлид: {member.name}
               </li>
             ))}
           </ul>
-          <h1 className="px-5 font-semibold text-[14px]">
+          <h1 className="px-5 mb-[15px] font-semibold text-[14px]">
             Менеджеры: {teamData.totalMembers}
           </h1>
-          {/* Контейнер для элементов с sample text */}
-          <div className="overflow-auto pb-20" style={{ height: "180px" }}>
-            {" "}
-            {/* Установите нужную высоту */}
-            <div className="grid gap-y-3 gap-x-8 py-1 grid-cols-2 pb-16 px-5 text-black">
-              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+          <div className="overflow-auto mt-[15px]" style={{ height: "210px" }}>
+            <div className="grid gap-y-3 gap-x-4 grid-cols-2 pb-16 px-5 text-black">
+              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
                 sample text
               </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
                 sample text
               </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
                 sample text
               </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
                 sample text
               </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
                 sample text
               </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
                 sample text
               </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[160px] h-[81px]`}>
+              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
                 sample text
               </h1>
             </div>
