@@ -18,13 +18,19 @@ export async function GET(request: NextRequest) {
 
   try {
     const teams = await prisma.teams.findMany({
-      where: id !== null ? { id: parseInt(id, 10) } : undefined,
+      where: {
+        ...(id && { id: parseInt(id, 10) }),
+      },
       include: {
         members: {
-          where: memberId !== null ? { id: parseInt(memberId, 10) } : undefined,
+          where: {
+            ...(memberId && { id: parseInt(memberId, 10) }),
+          },
           include: {
             stats: {
-              where: formattedDate ? { date: formattedDate } : undefined,
+              where: {
+                ...(formattedDate && { date: formattedDate }),
+              },
               select: {
                 id: true,
                 date: true,
