@@ -34,7 +34,6 @@ export async function GET(
       );
     }
 
-    // Получаем команду по team_id
     const team = await prisma.teams.findUnique({
       where: { id: user.team_id },
       include: {
@@ -54,28 +53,25 @@ export async function GET(
       );
     }
 
-    // Фильтруем членов с ролью TEAMLEAD
     const teamLeads = team.members.filter(
       (member) => member.role === "TEAMLEAD"
     );
 
-    // Получаем общее количество членов команды
     const totalMembersCount = team.members.length;
 
-    // Получаем прошлую дату в формате "день.месяц.год"
     const previousDate = new Date();
     previousDate.setDate(previousDate.getDate() - 1);
-    const day = String(previousDate.getDate()).padStart(2, "0"); // Добавляем ведущий ноль
-    const month = String(previousDate.getMonth() + 1).padStart(2, "0"); // Месяцы начинаются с 0
+    const day = String(previousDate.getDate()).padStart(2, "0");
+    const month = String(previousDate.getMonth() + 1).padStart(2, "0");
     const year = previousDate.getFullYear();
-    const formattedDate = `${day}.${month}.${year}`; // Форматируем дату как день.месяц.год
+    const formattedDate = `${day}.${month}.${year}`;
 
     if (teamLeads.length === 0) {
       return NextResponse.json(
         {
           message: "Нет членов с ролью TEAMLEAD",
           totalMembers: totalMembersCount,
-          previousDate: formattedDate, // Возвращаем дату
+          previousDate: formattedDate,
         },
         { status: 404 }
       );
@@ -86,8 +82,8 @@ export async function GET(
         team: {
           ...team,
           members: teamLeads,
-          totalMembers: totalMembersCount, // Возвращаем количество членов команды
-          previousDate: formattedDate, // Возвращаем дату
+          totalMembers: totalMembersCount,
+          previousDate: formattedDate,
         },
       },
       { status: 200 }
