@@ -7,14 +7,13 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
   const id = searchParams.get("id");
-  const memberId = searchParams.get("memberId"); // Получаем id участника
-  const date = searchParams.get("date"); // Получаем дату
+  const memberId = searchParams.get("memberId");
+  const date = searchParams.get("date");
 
-  // Преобразуем дату, если она передана
   let formattedDate;
   if (date) {
     const [day, month, year] = date.split("-");
-    formattedDate = new Date(`${year}-${month}-${day}`); // Преобразуем в формат YYYY-MM-DD
+    formattedDate = new Date(`${year}-${month}-${day}`);
   }
 
   try {
@@ -25,7 +24,7 @@ export async function GET(request: NextRequest) {
           where: memberId !== null ? { id: parseInt(memberId, 10) } : undefined,
           include: {
             stats: {
-              where: formattedDate ? { date: formattedDate } : undefined, // Фильтрация по дате
+              where: formattedDate ? { date: formattedDate } : undefined,
               select: {
                 id: true,
                 date: true,
