@@ -39,3 +39,13 @@ interface ITeam {
   title: string;
   members: Member[];
 }
+
+interface IMemberOption {
+  value: number;
+  label: string;
+}
+
+interface ITeamOption {
+  value: number;
+  label: string;
+}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from "react";
+import Select, { StylesConfig, SingleValue, MultiValue } from "react-select";
 
 const StatsControl = () => {
   const getYesterdaysDate = () => {
@@ -51,9 +52,132 @@ const StatsControl = () => {
     handleFilterChange();
   }, [handleFilterChange]);
 
+  const memberOptions: IMemberOption[] = [
+    { value: 0, label: "Все менеджеры" },
+    ...teams.flatMap((team) =>
+      team.members.map((member) => ({
+        value: member.id,
+        label: member.name,
+      }))
+    ),
+  ];
+
+  const teamOptions: ITeamOption[] = teams.map((team) => ({
+    value: team.id,
+    label: team.title,
+  }));
+
+ const customStylesManager: StylesConfig<IMemberOption> = {
+   menu: (provided) => ({
+     ...provided,
+     borderRadius: "0.75rem",
+     backgroundColor: "#2F313B",
+     position: "absolute",
+   }),
+   control: (provided, state) => ({
+     ...provided,
+     borderRadius: "0.75rem",
+     backgroundColor: "#2F313B",
+     borderColor: "transparent",
+     boxShadow: state.isFocused ? "0 0 0 1px #A8B4CE" : "none",
+     height: "42px",
+     minHeight: "42px",
+     "&:hover": {
+       borderColor: state.isFocused ? "#A8B4CE" : "transparent",
+     },
+     color: "white",
+   }),
+   singleValue: (provided) => ({
+     ...provided,
+     color: "white",
+   }),
+   placeholder: (provided) => ({
+     ...provided,
+     color: "white",
+   }),
+   menuList: (provided) => ({
+     ...provided,
+     color: "white",
+     padding: 0,
+     borderRadius: "0.75rem",
+   }),
+   option: (provided, { isFocused, isSelected }) => ({
+     ...provided,
+     backgroundColor: isSelected
+       ? "#A8B4CE"
+       : isFocused
+       ? "#3A3F47"
+       : "#2F313B",
+     color: "white",
+     padding: "10px",
+     borderBottom: "1px solid #4B5563",
+     "&:last-child": {
+       borderBottom: "none",
+     },
+     "&:hover": {
+       backgroundColor: "#3A3F47",
+     },
+   }),
+   input: (provided) => ({
+     ...provided,
+     color: "white",
+   }),
+ };
+
+  const customStylesTeams: StylesConfig<ITeamOption> = {
+    menu: (provided) => ({
+      ...provided,
+      borderRadius: "0.75rem",
+      backgroundColor: "#2F313B",
+      position: "absolute",
+    }),
+    control: (provided, state) => ({
+      ...provided,
+      borderRadius: "0.75rem",
+      backgroundColor: "#2F313B",
+      borderColor: "transparent",
+      boxShadow: state.isFocused ? "0 0 0 1px #A8B4CE" : "none",
+      height: "42px",
+      minHeight: "42px",
+      "&:hover": {
+        borderColor: state.isFocused ? "#A8B4CE" : "transparent",
+      },
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "white",
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: "white",
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      color: "white",
+      padding: 0,
+    }),
+    option: (provided, { isFocused, isSelected }) => ({
+      ...provided,
+      backgroundColor: isSelected
+        ? "#A8B4CE"
+        : isFocused
+        ? "#3A3F47"
+        : "#2F313B",
+      color: "white",
+      padding: "10px",
+      borderBottom: "1px solid #4B5563",
+      "&:last-child": {
+        borderBottom: "none",
+      },
+      "&:hover": {
+        backgroundColor: "#3A3F47",
+      },
+    }),
+  };
+
   return (
-    <div className="p-5">
-      <div className="mb-4 p-4">
+    <div className="p-4">
+      <div className="mb-4">
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <div>
@@ -65,34 +189,33 @@ const StatsControl = () => {
               />
             </div>
           </div>
-          <select
-            onChange={(e) => setSelectedMember(e.target.value)}
-            value={selectedMember}
-            className="p-2 w-ful bg-[#2F313B] rounded-xl"
-          >
-            <option value="">Выберите участника</option>
-            {teams.flatMap((team) =>
-              team.members.map((member) => (
-                <option key={member.id} value={member.id}>
-                  {member.name}
-                </option>
-              ))
-            )}
-          </select>
+          <Select<IMemberOption, false>
+            options={memberOptions}
+            onChange={(option: SingleValue<IMemberOption>) => {
+              if (option) {
+                if (option.value === 0) {
+                  setSelectedMember("");
+                } else {
+                  setSelectedMember(option.value.toString());
+                }
+              }
+            }}
+            styles={customStylesManager}
+            placeholder="Менеджер"
+            className="rounded-xl"
+            isSearchable={true}
+          />
         </div>
         <div>
-          <select
-            onChange={(e) => setSelectedTeam(e.target.value)}
-            value={selectedTeam}
-            className="p-2 w-full bg-[#2F313B] rounded-xl"
-          >
-            <option value="">Все команды</option>
-            {teams.map((team) => (
-              <option key={team.id} value={team.id}>
-                {team.title}
-              </option>
-            ))}
-          </select>
+          <Select<ITeamOption, false>
+            options={teamOptions}
+            onChange={(option: SingleValue<ITeamOption>) => {
+              setSelectedTeam(option ? option.value.toString() : "");
+            }}
+            styles={customStylesTeams}
+            placeholder="Выберите команду"
+            className="rounded-xl"
+          />
         </div>
       </div>
       <div className="h-[320px] overflow-y-auto">
