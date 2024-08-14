@@ -5,13 +5,15 @@ import { useEffect, useState } from 'react';
 import styles from '@/app/manager/manager.module.css'
 import { Icon } from '@iconify/react/dist/iconify.js';
 
+
 export function TeamTotalStat() {
   const initData = useInitData();
   const id = initData?.user?.id;
-  const [roleMessage, setRoleMessage] = useState("");
-  const [userTeam, setUserTeam] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [roleMessage, setRoleMessage] = useState<string>("");
+  const [userTeam, setUserTeam] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
   const [teamData, setTeamData] = useState<ITeamData | null>(null);
+  const [totalsData, setTotalsData] = useState<ITotalsData[]>([]); // State for totals data
 
   useEffect(() => {
     const fetchUserRole = async () => {
@@ -72,6 +74,29 @@ export function TeamTotalStat() {
     fetchTeamData();
   }, [id, userTeam]);
 
+  // New effect to fetch totals data
+  useEffect(() => {
+    const fetchTotalsData = async () => {
+      const response = await fetch(`/api/teams/totals/${id}`); // Fetch totals data
+      const data = await response.json();
+      if (response.ok) {
+        // Extract name and totals from the response
+        const totalsArray: ITotalsData[] = data.team.members.map(
+          (member: IMember) => ({
+            name: member.name,
+            totals: member.stats[0]?.totals || 0, // Get totals or default to 0 if no stats
+          })
+        );
+        setTotalsData(totalsArray); // Update the totals data state
+      }
+    };
+
+    if (userTeam) {
+      // Only fetch totals data if userTeam is available
+      fetchTotalsData();
+    }
+  }, [userTeam, id]);
+
   const bgColor = () => {
     switch (userTeam) {
       case "1":
@@ -124,27 +149,32 @@ export function TeamTotalStat() {
           </h1>
           <div className="overflow-auto mt-[15px]" style={{ height: "210px" }}>
             <div className="grid gap-y-3 gap-x-4 grid-cols-2 pb-16 px-5 text-black">
-              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
-                sample text
-              </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
-                sample text
-              </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
-                sample text
-              </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
-                sample text
-              </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
-                sample text
-              </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
-                sample text
-              </h1>
-              <h1 className={`rounded-2xl ${bgColor()} w-[166px] h-[96px]`}>
-                sample text
-              </h1>
+              {totalsData.length > 0 ? (
+                totalsData.map((total, index) => {
+                  // Split the full name into first name and last name.
+                  const [firstName, lastName] = total.name.split(" ");
+                  return (
+                    <div
+                      key={index}
+                      className={`rounded-2xl ${bgColor()} w-[166px] h-[96px] flex flex-col justify-center p-3`}
+                    >
+                      <div className="text-left">
+                        <div className="text-sm font-medium">{firstName}</div>
+                        <div className="text-sm font-medium">{lastName}</div>
+                      </div>
+                      <div className="mt-1 text-sm font-semibold">
+                        Итого: {total.totals}
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div
+                  className={`rounded-2xl ${bgColor()} w-[166px] h-[96px] flex items-center justify-center`}
+                >
+                  <h1 className="text-sm">Нет данных</h1>
+                </div>
+              )}
             </div>
           </div>
         </div>

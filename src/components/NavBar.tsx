@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import useNavigation from '@/hooks/useNavifation';
 import { useInitData } from '@telegram-apps/sdk-react';
 import { useEffect, useState } from 'react';
+import useScrollingEffect from '@/hooks/useScroll';
 
 export default function NavBar(){
 	 const {
@@ -19,7 +20,9 @@ export default function NavBar(){
   const id = initData?.user?.id;
   const [roleMessage, setRoleMessage] = useState("");
   const [userTeam, setUserTeam] = useState("");
-
+  const scrollDirection = useScrollingEffect(); // Use the custom hook
+  const navClass = scrollDirection === "up" ? "" : "opacity-25 duration-500";
+  
   useEffect(() => {
     const fetchUserRole = async () => {
       if (id) {

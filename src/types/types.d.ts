@@ -49,3 +49,16 @@ interface ITeamOption {
   value: number;
   label: string;
 }
+
+interface ITeamData {
+  id: number;
+  title: string;
+  members: IMember[]; // Changed to IMember[]
+  totalMembers: number;
+  previousDate: string;
+}
+
+interface ITotalsData {
+  name: string;
+  totals: number;
+}

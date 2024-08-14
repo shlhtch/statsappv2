@@ -119,9 +119,9 @@ const FormControl: React.FC = () => {
   };
 
   return (
-    <div className="pb-24 px-4 sm:px-6 lg:px-8 py-7 rounded-xl max-w-3xl mx-auto">
+    <div className="pb-24 px-4 sm:px-6 lg:px-8 py-7 rounded-2xl max-w-3xl mx-auto">
       <form
-        className="bg-[#2F313B] p-4 rounded-md space-y-4 h-[465px] overflow-y-auto"
+        className="bg-[#2F313B] p-4 rounded-2xl space-y-4 h-[465px] overflow-y-auto"
         onSubmit={handleSubmit}
       >
         <h2 className="text-xl text-white text-center mb-4 font-montserratAlternates font-semibold text-[16px]">
@@ -135,7 +135,7 @@ const FormControl: React.FC = () => {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full p-2 rounded-md bg-[#2F313B] text-gray-400 border border-gray-600 font-montserratAlternates font-medium text-[13px]"
+            className="w-full p-2 rounded-xl bg-[#2F313B] text-gray-400 border border-gray-600 font-montserratAlternates font-medium text-[13px]"
           />
           {error && <p className="text-red-500 mt-1">{error}</p>}
         </div>
@@ -146,7 +146,7 @@ const FormControl: React.FC = () => {
           <select
             value={userId || ""}
             onChange={(e) => setUserId(Number(e.target.value))}
-            className="w-full p-2 rounded-md bg-[#2F313B] text-gray-400 border border-gray-600 font-montserratAlternates font-medium text-[13px]"
+            className="w-full p-2 rounded-xl bg-[#2F313B] text-gray-400 border border-gray-600 font-montserratAlternates font-medium text-[13px]"
           >
             <option value="" disabled>
               Выберите менеджера
@@ -166,7 +166,7 @@ const FormControl: React.FC = () => {
             type="number"
             value={deposits === null ? "" : deposits}
             onChange={(e) => handleInputChange(setDeposits, e.target.value)}
-            className={`w-full p-2 rounded-md bg-[#2F313B] text-white border ${
+            className={`w-full p-2 rounded-xl bg-[#2F313B] text-white border ${
               inputErrors.deposits ? "border-red-500" : "border-gray-600"
             }`}
           />
@@ -182,7 +182,7 @@ const FormControl: React.FC = () => {
             type="number"
             value={redeposits === null ? "" : redeposits}
             onChange={(e) => handleInputChange(setRedeposits, e.target.value)}
-            className={`w-full p-2 rounded-md bg-[#2F313B] text-white border ${
+            className={`w-full p-2 rounded-xl bg-[#2F313B] text-white border ${
               inputErrors.redeposits ? "border-red-500" : "border-gray-600"
             }`}
           />
@@ -198,7 +198,7 @@ const FormControl: React.FC = () => {
             type="number"
             value={tir1 === null ? "" : tir1}
             onChange={(e) => handleInputChange(setTir1, e.target.value)}
-            className={`w-full p-2 rounded-md bg-[#2F313B] text-white border ${
+            className={`w-full p-2 rounded-xl bg-[#2F313B] text-white border ${
               inputErrors.tir1 ? "border-red-500" : "border-gray-600"
             }`}
           />
@@ -216,7 +216,7 @@ const FormControl: React.FC = () => {
             type="number"
             value={tir2 === null ? "" : tir2}
             onChange={(e) => handleInputChange(setTir2, e.target.value)}
-            className={`w-full p-2 rounded-md bg-[#2F313B] text-white border ${
+            className={`w-full p-2 rounded-xl bg-[#2F313B] text-white border ${
               inputErrors.tir2 ? "border-red-500" : "border-gray-600"
             }`}
           />
@@ -234,7 +234,7 @@ const FormControl: React.FC = () => {
             value={comment}
             placeholder="Сегодня я накосячил 3 раза. Сегодня я накосячил 3 раза. Сегодня я накосячил 3 раза."
             onChange={(e) => setComment(e.target.value)}
-            className="w-full p-2 rounded-md bg-[#2F313B] text-white border border-gray-600 font-montserratAlternates"
+            className="w-full p-2 rounded-xl bg-[#2F313B] text-white border border-gray-600 font-montserratAlternates"
           />
         </div>
         <button
