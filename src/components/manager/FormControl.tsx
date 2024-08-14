@@ -121,7 +121,7 @@ const FormControl: React.FC = () => {
   return (
     <div className="pb-24 px-4 sm:px-6 lg:px-8 py-7 rounded-xl max-w-3xl mx-auto">
       <form
-        className="bg-[#2F313B] p-4 rounded-md space-y-4 h-[470px] overflow-y-auto"
+        className="bg-[#2F313B] p-4 rounded-md space-y-4 h-[465px] overflow-y-auto"
         onSubmit={handleSubmit}
       >
         <h2 className="text-xl text-white text-center mb-4 font-montserratAlternates font-semibold text-[16px]">

@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import Select, { StylesConfig, SingleValue, MultiValue } from "react-select";
 
-const StatsControl = () => {
+const PointsControl = () => {
   const getYesterdaysDate = () => {
     const date = new Date();
     date.setDate(date.getDate() - 1);
@@ -14,9 +14,7 @@ const StatsControl = () => {
   const [filteredData, setFilteredData] = useState<IMember[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<string>("");
   const [selectedMember, setSelectedMember] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<string>(
-    getYesterdaysDate()
-  );
+  const [selectedDate, setSelectedDate] = useState<string>(getYesterdaysDate());
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -52,7 +50,7 @@ const StatsControl = () => {
 
         const matchDate = selectedDate
           ? member.stats.some((stat: IStat) => {
-              const statDate = new Date(stat.date).toISOString().split("T")[0]; 
+              const statDate = new Date(stat.date).toISOString().split("T")[0];
               return statDate === selectedDate;
             })
           : true;
@@ -85,62 +83,62 @@ const StatsControl = () => {
     })),
   ];
 
- const customStylesManager: StylesConfig<IMemberOption> = {
-   menu: (provided) => ({
-     ...provided,
-     borderRadius: "0.75rem",
-     backgroundColor: "#2F313B",
-     position: "absolute",
-   }),
-   control: (provided, state) => ({
-     ...provided,
-     borderRadius: "0.75rem",
-     backgroundColor: "#2F313B",
-     borderColor: "transparent",
-     boxShadow: state.isFocused ? "0 0 0 1px #A8B4CE" : "none",
-     height: "42px",
-     minHeight: "42px",
-     "&:hover": {
-       borderColor: state.isFocused ? "#A8B4CE" : "transparent",
-     },
-     color: "white",
-   }),
-   singleValue: (provided) => ({
-     ...provided,
-     color: "white",
-   }),
-   placeholder: (provided) => ({
-     ...provided,
-     color: "white",
-   }),
-   menuList: (provided) => ({
-     ...provided,
-     color: "white",
-     padding: 0,
-     borderRadius: "0.75rem",
-   }),
-   option: (provided, { isFocused, isSelected }) => ({
-     ...provided,
-     backgroundColor: isSelected
-       ? "#A8B4CE"
-       : isFocused
-       ? "#3A3F47"
-       : "#2F313B",
-     color: "white",
-     padding: "10px",
-     borderBottom: "1px solid #4B5563",
-     "&:last-child": {
-       borderBottom: "none",
-     },
-     "&:hover": {
-       backgroundColor: "#3A3F47",
-     },
-   }),
-   input: (provided) => ({
-     ...provided,
-     color: "white",
-   }),
- };
+  const customStylesManager: StylesConfig<IMemberOption> = {
+    menu: (provided) => ({
+      ...provided,
+      borderRadius: "0.75rem",
+      backgroundColor: "#2F313B",
+      position: "absolute",
+    }),
+    control: (provided, state) => ({
+      ...provided,
+      borderRadius: "0.75rem",
+      backgroundColor: "#2F313B",
+      borderColor: "transparent",
+      boxShadow: state.isFocused ? "0 0 0 1px #A8B4CE" : "none",
+      height: "42px",
+      minHeight: "42px",
+      "&:hover": {
+        borderColor: state.isFocused ? "#A8B4CE" : "transparent",
+      },
+      color: "white",
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "white",
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: "white",
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      color: "white",
+      padding: 0,
+      borderRadius: "0.75rem",
+    }),
+    option: (provided, { isFocused, isSelected }) => ({
+      ...provided,
+      backgroundColor: isSelected
+        ? "#A8B4CE"
+        : isFocused
+        ? "#3A3F47"
+        : "#2F313B",
+      color: "white",
+      padding: "10px",
+      borderBottom: "1px solid #4B5563",
+      "&:last-child": {
+        borderBottom: "none",
+      },
+      "&:hover": {
+        backgroundColor: "#3A3F47",
+      },
+    }),
+    input: (provided) => ({
+      ...provided,
+      color: "white",
+    }),
+  };
 
   const customStylesTeams: StylesConfig<ITeamOption> = {
     menu: (provided) => ({
@@ -250,19 +248,31 @@ const StatsControl = () => {
                 Менеджер
               </th>
               <th className="sticky top-0 bg-[#454752] py-5 font-medium text-[15px] px-2">
-                Депы
+                №1
               </th>
               <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
-                Додепы
+                №2
               </th>
               <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
-                Tir1
+                №3
               </th>
               <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
-                Tir2
+                №4
               </th>
-              <th className="sticky top-0 bg-[#2F313B] text-left py-5 font-medium text-[15px] px-2">
-                Отчет
+              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+                №5
+              </th>
+              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+                Беспорядок в СРМ
+              </th>
+              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+                Невыполненные задачи
+              </th>
+              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+                По согласованию
+              </th>
+              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+                Итого
               </th>
             </tr>
           </thead>
@@ -309,4 +319,4 @@ const StatsControl = () => {
   );
 };
 
-export default StatsControl;
+export default PointsControl;
