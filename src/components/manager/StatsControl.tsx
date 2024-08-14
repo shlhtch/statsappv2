@@ -271,23 +271,23 @@ const StatsControl = () => {
               filteredData.map((member) =>
                 member.stats.map((stat) => (
                   <tr key={stat.id}>
-                    <td className="px-2 py-2 border-b border-gray-500 font-medium text-[14px]">
+                    <td className="px-2 py-2 border-b border-gray-500 font-normal text-[14px]">
                       {member.name}
                     </td>
-                    <td className="px-2 py-2 border-b border-gray-500 text-center font-medium text-[15px]">
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
                       {stat.deposits}
                     </td>
-                    <td className="px-2 py-2 border-b border-gray-500 text-center font-medium text-[15px]">
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
                       {stat.redeposits}
                     </td>
-                    <td className="px-2 py-2 border-b border-gray-500 text-center font-medium text-[15px]">
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
                       {stat.tir1}
                     </td>
-                    <td className="px-2 py-2 border-b border-gray-500 text-center font-medium text-[15px]">
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
                       {stat.tir2}
                     </td>
                     <td
-                      className="px-2 py-2 overflow-hidden overflow-ellipsis whitespace-nowrap hover:bg-gray-700 hover:text-white transition-colors duration-200 border-b border-gray-500 font-medium text-[15px]"
+                      className="px-2 py-2 overflow-hidden overflow-ellipsis whitespace-nowrap hover:bg-gray-700 hover:text-white transition-colors duration-200 border-b border-gray-500 font-normal text-[15px]"
                       style={{ maxHeight: "40px" }}
                     >
                       {stat.comment}

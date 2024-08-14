@@ -244,34 +244,34 @@ const PointsControl = () => {
         <table className="min-w-full">
           <thead className="bg-[#2F313B]">
             <tr>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
                 Менеджер
               </th>
-              <th className="sticky top-0 bg-[#454752] py-5 font-medium text-[15px] px-2">
+              <th className="sticky top-0 bg-[#454752] py-4 font-medium text-[15px] px-2">
                 №1
               </th>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
                 №2
               </th>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
                 №3
               </th>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
                 №4
               </th>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
                 №5
               </th>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
-                Беспорядок в СРМ
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2 text-left">
+                Бесп-ок в СРМ
               </th>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
-                Невыполненные задачи
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2 text-left">
+                Невып-ые задачи
               </th>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
-                По согласованию
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2 text-left">
+                По согл-анию
               </th>
-              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
+              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
                 Итого
               </th>
             </tr>
@@ -281,26 +281,35 @@ const PointsControl = () => {
               filteredData.map((member) =>
                 member.stats.map((stat) => (
                   <tr key={stat.id}>
-                    <td className="px-2 py-2 border-b border-gray-500 font-medium text-[14px]">
+                    <td className="px-2 py-2 border-b border-gray-500 font-normal text-[14px]">
                       {member.name}
                     </td>
-                    <td className="px-2 py-2 border-b border-gray-500 text-center font-medium text-[15px]">
-                      {stat.deposits}
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
+                      {stat.firstvalue}
                     </td>
-                    <td className="px-2 py-2 border-b border-gray-500 text-center font-medium text-[15px]">
-                      {stat.redeposits}
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
+                      {stat.secondvalue}
                     </td>
-                    <td className="px-2 py-2 border-b border-gray-500 text-center font-medium text-[15px]">
-                      {stat.tir1}
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
+                      {stat.thirdvalue}
                     </td>
-                    <td className="px-2 py-2 border-b border-gray-500 text-center font-medium text-[15px]">
-                      {stat.tir2}
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
+                      {stat.fourthvalue}
                     </td>
-                    <td
-                      className="px-2 py-2 overflow-hidden overflow-ellipsis whitespace-nowrap hover:bg-gray-700 hover:text-white transition-colors duration-200 border-b border-gray-500 font-medium text-[15px]"
-                      style={{ maxHeight: "40px" }}
-                    >
-                      {stat.comment}
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
+                      {stat.fifthvalue}
+                    </td>
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px] ">
+                      {stat.firtsminus}
+                    </td>
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
+                      {stat.secondminus}
+                    </td>
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
+                      {stat.thirdminus}
+                    </td>
+                    <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
+                      {stat.totals}
                     </td>
                   </tr>
                 ))
