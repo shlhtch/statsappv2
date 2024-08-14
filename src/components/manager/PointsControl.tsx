@@ -4,17 +4,33 @@ import { useEffect, useState, useCallback } from "react";
 import Select, { StylesConfig, SingleValue, MultiValue } from "react-select";
 
 const PointsControl = () => {
-  const getYesterdaysDate = () => {
-    const date = new Date();
-    date.setDate(date.getDate() - 1);
-    return date.toISOString().split("T")[0]; // Возвращает дату в формате YYYY-MM-DD
-  };
-
   const [teams, setTeams] = useState<ITeam[]>([]);
   const [filteredData, setFilteredData] = useState<IMember[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<string>("");
   const [selectedMember, setSelectedMember] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<string>(getYesterdaysDate());
+  const [hover, setHover] = useState<number | null>(null);
+
+  const headers = [
+    { title: "Менеджер", hoverText: "Менеджер" },
+    { title: "№1", hoverText: "3 и более депов" },
+    { title: "№2", hoverText: "Додепы = депы" },
+    { title: "№3", hoverText: "Додепов в два раза больше депов" },
+    { title: "№4", hoverText: "Tir1 > 150 или Tir2 > 100" },
+    { title: "№5", hoverText: "Больше всего депов за день" },
+    { title: "Бесп-ок в СРМ", hoverText: "Бесп-ок в СРМ" },
+    { title: "Невып-ые задачи", hoverText: "Невып-ые задачи" },
+    { title: "По согл-ию", hoverText: "По согласованию" },
+    { title: "Итого", hoverText: "Итого" },
+  ];
+
+    const getYesterdaysDate = () => {
+      const date = new Date();
+      date.setDate(date.getDate() - 1);
+      return date.toISOString().split("T")[0];
+    };
+    const [selectedDate, setSelectedDate] = useState<string>(
+      getYesterdaysDate()
+    );
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -242,38 +258,18 @@ const PointsControl = () => {
       </div>
       <div className="h-[355px] overflow-y-auto bg-[#2F313B] rounded-xl">
         <table className="min-w-full">
-          <thead className="bg-[#2F313B]">
+          <thead>
             <tr>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
-                Менеджер
-              </th>
-              <th className="sticky top-0 bg-[#454752] py-4 font-medium text-[15px] px-2">
-                №1
-              </th>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
-                №2
-              </th>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
-                №3
-              </th>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
-                №4
-              </th>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
-                №5
-              </th>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2 text-left">
-                Бесп-ок в СРМ
-              </th>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2 text-left">
-                Невып-ые задачи
-              </th>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2 text-left">
-                По согл-анию
-              </th>
-              <th className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2">
-                Итого
-              </th>
+              {headers.map((header, index) => (
+                <th
+                  key={index}
+                  className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2"
+                  onMouseEnter={() => setHover(index)}
+                  onMouseLeave={() => setHover(null)}
+                >
+                  {hover === index ? header.hoverText : header.title}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody className="py-4">
