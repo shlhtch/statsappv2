@@ -7,7 +7,7 @@ const StatsControl = () => {
   const getYesterdaysDate = () => {
     const date = new Date();
     date.setDate(date.getDate() - 1);
-    return date.toISOString().split("T")[0]; // Возвращает дату в формате YYYY-MM-DD
+    return date.toISOString().split("T")[0];
   };
 
   const [teams, setTeams] = useState<ITeam[]>([]);

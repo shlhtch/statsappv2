@@ -129,7 +129,7 @@ const DetailStatsControl: React.FC = () => {
     <div className="bg-[#2F313B] h-[500px] overflow-y-auto p-4 rounded-md">
       <h2 className="text-white text-lg mb-2">{userName}</h2>
       <h3 className="text-white text-md mb-4">{userRole}</h3>
-      <ul className="space-y-2">
+      <ul className="space-y-5">
         {editedStats.map((stat, index) => (
           <li
             key={stat.id}

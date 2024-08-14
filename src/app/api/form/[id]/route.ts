@@ -34,7 +34,6 @@ export async function GET(
       );
     }
 
-    // Получаем команду по team_id
     const team = await prisma.teams.findUnique({
       where: { id: user.team_id },
       include: {
