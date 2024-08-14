@@ -1,5 +1,11 @@
 "use client";
 
+import DetailStatsControl from '@/components/manager/DetailStatControl';
+
 export default function TeamsPage() {
-  return <div>Команды</div>;
+  return (
+    <div className="font-montserratAlternates">
+      <DetailStatsControl />
+    </div>
+  );
 }

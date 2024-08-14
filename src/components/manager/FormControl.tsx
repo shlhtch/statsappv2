@@ -112,7 +112,7 @@ const FormControl: React.FC = () => {
       }
       const result = await response.json();
       console.log("Response:", result);
-      router.push("/manager/stats");
+      router.push("/manager/teams");
     } catch (error) {
       console.error("Error:", error);
     }
