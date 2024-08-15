@@ -11,16 +11,25 @@ const PointsControl = () => {
   const [hover, setHover] = useState<number | null>(null);
 
   const headers = [
-    { title: "Менеджер", hoverText: "Менеджер" },
-    { title: "№1", hoverText: "3 и более депов" },
+    { title: "Менеджер", hoverText: "Менеджер"},
+    { title: "№1", hoverText: "3 и более депов"},
     { title: "№2", hoverText: "Додепы = депы" },
-    { title: "№3", hoverText: "Додепов в два раза больше депов" },
-    { title: "№4", hoverText: "Tir1 > 150 или Tir2 > 100" },
+    { title: "№3", hoverText: "Додепов в два раза больше депов"},
+    { title: "№4", hoverText: "Tir1 > 150;Tir2 > 100"},
     { title: "№5", hoverText: "Больше всего депов за день" },
-    { title: "Бесп-ок в СРМ", hoverText: "Бесп-ок в СРМ" },
-    { title: "Невып-ые задачи", hoverText: "Невып-ые задачи" },
-    { title: "По согл-ию", hoverText: "По согласованию" },
-    { title: "Итого", hoverText: "Итого" },
+    {
+      title: "№6",
+      hoverText: "Бес-ок в СРМ",
+    },
+    {
+      title: "№7",
+      hoverText: "Нев-ые задачи",
+    },
+    {
+      title: "№8",
+      hoverText: "По согл-ию",
+    },
+    { title: "Итого", hoverText: "Итого"},
   ];
 
     const getYesterdaysDate = () => {
@@ -256,18 +265,30 @@ const PointsControl = () => {
           />
         </div>
       </div>
-      <div className="h-[355px] overflow-y-auto bg-[#2F313B] rounded-xl">
+      <div
+        className={`overflow-y-auto bg-[#2F313B] rounded-xl ${
+          filteredData.length <= 5 ? "h-auto" : "h-[355px]"
+        }`}
+      >
         <table className="min-w-full">
           <thead>
             <tr>
               {headers.map((header, index) => (
                 <th
                   key={index}
-                  className="sticky top-0 bg-[#2F313B] py-4 font-medium text-[15px] px-2"
-                  onMouseEnter={() => setHover(index)}
-                  onMouseLeave={() => setHover(null)}
+                  className={`sticky top-0 bg-[#2F313B] py-6 text-left font-medium border-b border-gray-500 mx-3 transition-all duration-400 ease-in-out ${
+                    index >= 1 && index <= 8 && hover === index
+                      ? "text-[12px]"
+                      : "text-[14px] px-2"
+                  }`}
+                  onMouseEnter={() =>
+                    index >= 1 && index <= 8 ? setHover(index) : null
+                  }
+                  onMouseLeave={() =>
+                    index >= 1 && index <= 8 ? setHover(null) : null
+                  }
                 >
-                  {hover === index ? header.hoverText : header.title}
+                  {hover === index ? header.hoverText : header.title}{" "}
                 </th>
               ))}
             </tr>
@@ -277,7 +298,7 @@ const PointsControl = () => {
               filteredData.map((member) =>
                 member.stats.map((stat) => (
                   <tr key={stat.id}>
-                    <td className="px-2 py-2 border-b border-gray-500 font-normal text-[14px]">
+                    <td className="px-2 py-2 border-b border-gray-500 text-left font-normal text-[15px]">
                       {member.name}
                     </td>
                     <td className="px-2 py-2 border-b border-gray-500 text-center font-normal text-[15px]">
@@ -312,7 +333,7 @@ const PointsControl = () => {
               )
             ) : (
               <tr>
-                <td colSpan={6} className="border p-2 text-center">
+                <td colSpan={10} className="border p-2 text-center">
                   Нет данных
                 </td>
               </tr>

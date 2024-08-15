@@ -242,14 +242,18 @@ const StatsControl = () => {
           />
         </div>
       </div>
-      <div className="h-[355px] overflow-y-auto bg-[#2F313B] rounded-xl">
+      <div
+        className={`overflow-y-auto bg-[#2F313B] rounded-xl ${
+          filteredData.length <= 5 ? "h-auto" : "h-[355px]"
+        }`}
+      >
         <table className="min-w-full">
-          <thead className="bg-[#2F313B]">
+          <thead className="bg-[#2F313B] border-b border-gray-500 text-left">
             <tr>
               <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
                 Менеджер
               </th>
-              <th className="sticky top-0 bg-[#454752] py-5 font-medium text-[15px] px-2">
+              <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
                 Депы
               </th>
               <th className="sticky top-0 bg-[#2F313B] py-5 font-medium text-[15px] px-2">
