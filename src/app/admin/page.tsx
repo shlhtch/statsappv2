@@ -2,8 +2,6 @@
 
 import AdminStatsControl from '@/components/admin/AdminStatsControl';
 
-
-
 export default function AdminPage() {
 
   return (

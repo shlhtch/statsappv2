@@ -154,7 +154,7 @@ export function TeamTotalStat() {
           <div className="text-center font-extrabold text-[20px]">
             {teamData.previousDate}
           </div>
-          <h1 className="px-5 mt-[134px] mb-1 font-semibold text-[20px]">
+          <h1 className="px-5 mt-[144px] mb-1 font-semibold text-[20px]">
             {teamData.title}
           </h1>
           <ul>
@@ -167,11 +167,10 @@ export function TeamTotalStat() {
           <h1 className="px-5 mb-[15px] font-semibold text-[14px]">
             Менеджеры: {teamData.totalMembers}
           </h1>
-          <div className="overflow-auto mt-[15px]" style={{ height: "210px" }}>
+          <div className="overflow-auto mt-[20px]" style={{ height: "210px" }}>
             <div className="grid gap-y-3 gap-x-4 grid-cols-2 pb-16 px-5 text-black">
               {totalsData.length > 0 ? (
                 totalsData.map((total, index) => {
-                  // Split the full name into first name and last name.
                   const [firstName, lastName] = total.name.split(" ");
                   return (
                     <div
@@ -179,10 +178,14 @@ export function TeamTotalStat() {
                       className={`rounded-2xl ${bgColor()} w-[166px] h-[96px] flex flex-col justify-center p-3`}
                     >
                       <div className="text-left">
-                        <div className="text-sm font-medium">{firstName}</div>
-                        <div className="text-sm font-medium">{lastName}</div>
+                        <div className="font-medium text-[14px]">
+                          {firstName}
+                        </div>
+                        <div className="font-medium text-[14px]">
+                          {lastName}
+                        </div>
                       </div>
-                      <div className="mt-1 text-sm font-semibold">
+                      <div className="mt-1 font-semibold text-[14px]">
                         Итого: {total.totals}
                       </div>
                     </div>

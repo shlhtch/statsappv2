@@ -226,7 +226,7 @@ const PointsControl = () => {
                 type="date"
                 onChange={(e) => setSelectedDate(e.target.value)}
                 value={selectedDate}
-                className="p-2 w-full bg-[#2F313B] rounded-xl text-center"
+                className="p-2 w-full bg-[#2F313B] rounded-xl text-center font-medium text-[14px]"
               />
             </div>
           </div>
@@ -243,7 +243,7 @@ const PointsControl = () => {
             }}
             styles={customStylesManager}
             placeholder="Менеджер"
-            className="rounded-xl text-center"
+            className="rounded-xl text-center text-[14px] font-medium"
             isSearchable={true}
           />
         </div>
@@ -261,7 +261,7 @@ const PointsControl = () => {
             }}
             styles={customStylesTeams}
             placeholder="Выберите команду"
-            className="rounded-xl text-center"
+            className="rounded-xl text-center text-[14px] font-medium"
           />
         </div>
       </div>

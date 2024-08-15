@@ -6,23 +6,16 @@ import { Icon } from "@iconify/react";
 import useNavigation from '@/hooks/useNavifation';
 import { useInitData } from '@telegram-apps/sdk-react';
 import { useEffect, useState } from 'react';
-import useScrollingEffect from '@/hooks/useScroll';
 
 export default function NavBar(){
-	 const {
-     isHomeActive,
-     isExploreActive,
-     isMessagesActive,
-     isTeamsActive,
-   } = useNavigation();
-  
+  const { isHomeActive, isExploreActive, isMessagesActive, isTeamsActive } =
+    useNavigation();
+
   const initData = useInitData();
   const id = initData?.user?.id;
   const [roleMessage, setRoleMessage] = useState("");
   const [userTeam, setUserTeam] = useState("");
-  const scrollDirection = useScrollingEffect(); // Use the custom hook
-  const navClass = scrollDirection === "up" ? "" : "opacity-25 duration-500";
-  
+
   useEffect(() => {
     const fetchUserRole = async () => {
       if (id) {
@@ -42,7 +35,7 @@ export default function NavBar(){
 
     fetchUserRole();
   }, [id]);
-  
+
   const getClassName = (isActive: any) => {
     if (userTeam === "1") {
       return isActive ? "text-[#461799]" : "text-[#BAD7D6]";
@@ -76,25 +69,25 @@ export default function NavBar(){
   };
 
   const getFillColor = (userTeam: string) => {
-  if (userTeam === "1") {
-    return "#461799";
-  } else if (userTeam === "3") {
-    return "#CB4E07";
-  } else if (userTeam === "2") {
-    return "#29B298";
-  } else if (userTeam === "4") {
-    return "#0052B3";
-  } else if (userTeam === "5") {
-    return "#8D7F7B";
-  } else {
-    return "#AE0900";
-  }
-};
+    if (userTeam === "1") {
+      return "#461799";
+    } else if (userTeam === "3") {
+      return "#CB4E07";
+    } else if (userTeam === "2") {
+      return "#29B298";
+    } else if (userTeam === "4") {
+      return "#0052B3";
+    } else if (userTeam === "5") {
+      return "#8D7F7B";
+    } else {
+      return "#AE0900";
+    }
+  };
 
- const fillColor = getFillColor(userTeam); 
+  const fillColor = getFillColor(userTeam);
 
-	return (
-    <div className="relative">
+  return (
+    <div className={`relative`}>
       <img
         src="/navbar.svg"
         alt="Navbar Background"

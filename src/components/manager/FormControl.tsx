@@ -147,7 +147,7 @@ const FormControl: React.FC = () => {
           Отчет
         </h2>
         <div>
-          <label className="block text-white font-montserratAlternates font-normal text-[14px]">
+          <label className="block text-white font-montserratAlternates font-normal text-[13px]">
             Дата
           </label>
           <input
