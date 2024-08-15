@@ -1,5 +1,6 @@
 'use client'
 
+import { Icon } from '@iconify/react/dist/iconify.js';
 import { useInitData } from '@telegram-apps/sdk-react';
 import React, { useEffect, useState } from 'react';
 
@@ -101,7 +102,16 @@ const DetailStatsControl: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="text-white">Загрузка...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Icon
+          icon="material-symbols-light:poker-chip"
+          width="64"
+          height="64"
+          className="text-[#8D7F7B] rotating-icon"
+        />
+      </div>
+    );
   }
 
   if (error) {

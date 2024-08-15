@@ -203,7 +203,7 @@ const StatsControl = () => {
                 type="date"
                 onChange={(e) => setSelectedDate(e.target.value)}
                 value={selectedDate}
-                className="p-2 w-full bg-[#2F313B] rounded-xl"
+                className="p-2 w-full bg-[#2F313B] rounded-xl text-center"
               />
             </div>
           </div>
@@ -220,7 +220,7 @@ const StatsControl = () => {
             }}
             styles={customStylesManager}
             placeholder="Менеджер"
-            className="rounded-xl"
+            className="rounded-xl text-center"
             isSearchable={true}
           />
         </div>
@@ -238,7 +238,7 @@ const StatsControl = () => {
             }}
             styles={customStylesTeams}
             placeholder="Выберите команду"
-            className="rounded-xl"
+            className="rounded-xl text-center"
           />
         </div>
       </div>
