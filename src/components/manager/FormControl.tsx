@@ -22,6 +22,7 @@ const FormControl: React.FC = () => {
     tir2: "",
   });
   const [teamMembers, setTeamMembers] = useState<any[]>([]);
+  const [teamId, setTeamId] = useState<number | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -39,6 +40,7 @@ const FormControl: React.FC = () => {
         const response = await fetch(`/api/form/${id}`);
         const result = await response.json();
         setTeamMembers(result.team.members);
+        setTeamId(result.team.id);
       } catch (error) {
         console.error("Ошибка получения участников команды:", error);
       }
@@ -118,6 +120,23 @@ const FormControl: React.FC = () => {
     }
   };
 
+  const bgColor = () => {
+    switch (teamId) {
+      case 1:
+        return "bg-[#CFA3F2]";
+      case 2:
+        return "bg-[#064040]";
+      case 3:
+        return "bg-[#904636]";
+      case 4:
+        return "bg-[#0052B3]";
+      case 5:
+        return "bg-[#8D7F7B]";
+      default:
+        return "bg-[#AE0900]";
+    }
+  };
+  
   return (
     <div className="pb-24 px-4 sm:px-6 lg:px-8 py-7 rounded-2xl max-w-3xl mx-auto">
       <form
@@ -239,7 +258,7 @@ const FormControl: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="mt-4 px-4 py-2 bg-[#461799] text-white w-full rounded-xl transition hover:bg-gray-600 font-montserratAlternates"
+          className={`mt-4 px-4 py-2 ${bgColor()} text-white w-full rounded-xl transition hover:bg-gray-600 font-montserratAlternates`}
         >
           Добавить отчет
         </button>

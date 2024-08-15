@@ -126,126 +126,132 @@ const DetailStatsControl: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#2F313B] h-[1000px] overflow-y-auto p-4 rounded-md">
+    <div className="bg-[#2F313B] h-[1000px] p-4 rounded-md mx-2">
       <h2 className="text-white text-lg mb-2">{userName}</h2>
       <h3 className="text-white text-md mb-4">{userRole}</h3>
-      <ul className="space-y-5">
-        {editedStats.map((stat, index) => (
-          <li
-            key={stat.id}
-            className={`bg-[#3A3E47] p-4 rounded-md flex ${
-              editingIndex === index ? "bg-[#5e636d]" : ""
-            }`}
-          >
-            <div className="flex flex-col gap-2 pr-4 border-r border-gray-600">
-              <div className="flex justify-between">
-                <p className="text-white">
-                  {new Date(stat.date).toLocaleDateString()}
-                </p>
+      <div className="h-[500px] overflow-y-auto pb-28">
+        <ul className="space-y-5">
+          {editedStats.map((stat, index) => (
+            <li
+              key={stat.id}
+              className={`bg-[#3A3E47] p-4 rounded-md flex ${
+                editingIndex === index ? "bg-[#5e636d]" : ""
+              }`}
+            >
+              <div className="flex flex-col gap-2 pr-4 border-r border-gray-600">
+                <div className="flex justify-between">
+                  <p className="text-white">
+                    {new Date(stat.date).toLocaleDateString()}
+                  </p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-white">Депы:</p>
+                  <p className="text-white">
+                    <input
+                      type="number"
+                      min={0}
+                      value={
+                        editingIndex === index ? stat.deposits : stat.deposits
+                      }
+                      onChange={(e) =>
+                        handleChange(index, "deposits", e.target.value)
+                      }
+                      readOnly={editingIndex !== index}
+                      className={`bg-[#3A3E47] text-white ${
+                        editingIndex !== index ? "cursor-not-allowed" : ""
+                      } px-1 w-16`}
+                    />
+                  </p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-white">Додепы:</p>
+                  <p className="text-white">
+                    <input
+                      type="number"
+                      min={0}
+                      value={
+                        editingIndex === index
+                          ? stat.redeposits
+                          : stat.redeposits
+                      }
+                      onChange={(e) =>
+                        handleChange(index, "redeposits", e.target.value)
+                      }
+                      readOnly={editingIndex !== index}
+                      className={`bg-[#3A3E47] text-white ${
+                        editingIndex !== index ? "cursor-not-allowed" : ""
+                      } px-1 w-16`}
+                    />
+                  </p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-white">TIR1:</p>
+                  <p className="text-white">
+                    <input
+                      type="number"
+                      min={0}
+                      value={editingIndex === index ? stat.tir1 : stat.tir1}
+                      onChange={(e) =>
+                        handleChange(index, "tir1", e.target.value)
+                      }
+                      readOnly={editingIndex !== index}
+                      className={`bg-[#3A3E47] text-white ${
+                        editingIndex !== index ? "cursor-not-allowed" : ""
+                      } px-1 w-16`}
+                    />
+                  </p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-white">TIR2:</p>
+                  <p className="text-white">
+                    <input
+                      type="number"
+                      min={0}
+                      value={editingIndex === index ? stat.tir2 : stat.tir2}
+                      onChange={(e) =>
+                        handleChange(index, "tir2", e.target.value)
+                      }
+                      readOnly={editingIndex !== index}
+                      className={`bg-[#3A3E47] text-white ${
+                        editingIndex !== index ? "cursor-not-allowed" : ""
+                      } px-1 w-16`}
+                    />
+                  </p>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <p className="text-white">Депы:</p>
-                <p className="text-white">
-                  <input
-                    type="number"
-                    min={0}
-                    value={
-                      editingIndex === index ? stat.deposits : stat.deposits
-                    }
-                    onChange={(e) =>
-                      handleChange(index, "deposits", e.target.value)
-                    }
-                    readOnly={editingIndex !== index}
-                    className={`bg-[#3A3E47] text-white ${
-                      editingIndex !== index ? "cursor-not-allowed" : ""
-                    } px-1 w-16`}
-                  />
-                </p>
+              <div className="ml-4 flex-1">
+                <textarea
+                  className="w-full h-24 bg-[#3A3E47] text-white p-2 border-none resize-none"
+                  value={
+                    editingIndex === index
+                      ? stat.comment
+                      : stat.comment || "Без отчета"
+                  }
+                  onChange={(e) =>
+                    handleChange(index, "comment", e.target.value)
+                  }
+                  readOnly={editingIndex !== index}
+                />
+                {editingIndex === index ? (
+                  <button
+                    onClick={() => handleSave(index)}
+                    className="py-3 bg-green-600 text-white w-full px-4 rounded-xl hover:bg-green-500"
+                  >
+                    Сохранить
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleEdit(index)}
+                    className={`py-3 text-white w-full px-4 rounded-xl ${bgColor()} hover:bg-opacity-80`}
+                  >
+                    Изменить
+                  </button>
+                )}
               </div>
-              <div className="flex justify-between">
-                <p className="text-white">Додепы:</p>
-                <p className="text-white">
-                  <input
-                    type="number"
-                    min={0}
-                    value={
-                      editingIndex === index ? stat.redeposits : stat.redeposits
-                    }
-                    onChange={(e) =>
-                      handleChange(index, "redeposits", e.target.value)
-                    }
-                    readOnly={editingIndex !== index}
-                    className={`bg-[#3A3E47] text-white ${
-                      editingIndex !== index ? "cursor-not-allowed" : ""
-                    } px-1 w-16`}
-                  />
-                </p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-white">TIR1:</p>
-                <p className="text-white">
-                  <input
-                    type="number"
-                    min={0}
-                    value={editingIndex === index ? stat.tir1 : stat.tir1}
-                    onChange={(e) =>
-                      handleChange(index, "tir1", e.target.value)
-                    }
-                    readOnly={editingIndex !== index}
-                    className={`bg-[#3A3E47] text-white ${
-                      editingIndex !== index ? "cursor-not-allowed" : ""
-                    } px-1 w-16`}
-                  />
-                </p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-white">TIR2:</p>
-                <p className="text-white">
-                  <input
-                    type="number"
-                    min={0}
-                    value={editingIndex === index ? stat.tir2 : stat.tir2}
-                    onChange={(e) =>
-                      handleChange(index, "tir2", e.target.value)
-                    }
-                    readOnly={editingIndex !== index}
-                    className={`bg-[#3A3E47] text-white ${
-                      editingIndex !== index ? "cursor-not-allowed" : ""
-                    } px-1 w-16`}
-                  />
-                </p>
-              </div>
-            </div>
-            <div className="ml-4 flex-1">
-              <textarea
-                className="w-full h-24 bg-[#3A3E47] text-white p-2 border-none resize-none"
-                value={
-                  editingIndex === index
-                    ? stat.comment
-                    : stat.comment || "Без отчета"
-                }
-                onChange={(e) => handleChange(index, "comment", e.target.value)}
-                readOnly={editingIndex !== index}
-              />
-              {editingIndex === index ? (
-                <button
-                  onClick={() => handleSave(index)}
-                  className="py-3 bg-green-600 text-white w-full px-4 rounded-xl hover:bg-green-500"
-                >
-                  Сохранить
-                </button>
-              ) : (
-                <button
-                  onClick={() => handleEdit(index)}
-                  className={`py-3 text-white w-full px-4 rounded-xl ${bgColor()} hover:bg-opacity-80`}
-                >
-                  Изменить
-                </button>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
       {warnings.length > 0 && (
         <div className="text-red-500 mt-2">
           {warnings.map((warning, index) => (

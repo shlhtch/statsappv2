@@ -4,6 +4,7 @@ import { useInitData } from '@telegram-apps/sdk-react';
 import { useEffect, useState } from 'react';
 import styles from '@/app/manager/manager.module.css'
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { usePathname } from 'next/navigation';
 
 
 export function TeamTotalStat() {
@@ -13,7 +14,8 @@ export function TeamTotalStat() {
   const [userTeam, setUserTeam] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [teamData, setTeamData] = useState<ITeamData | null>(null);
-  const [totalsData, setTotalsData] = useState<ITotalsData[]>([]); // State for totals data
+  const [totalsData, setTotalsData] = useState<ITotalsData[]>([]);
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchUserRole = async () => {
@@ -36,27 +38,48 @@ export function TeamTotalStat() {
     fetchUserRole();
   }, [id]);
 
-  useEffect(() => {
-    document.body.classList.remove(
-      styles.managerbgTMNT,
-      styles.managerbgDH,
-      styles.managerbgHFM,
-      styles.managerbgBMC,
-      styles.managerbgPNX
-    );
+    useEffect(() => {
+      // Удаляем все классы
+      document.body.classList.remove(
+        styles.managerbgTMNT,
+        styles.managerbgDH,
+        styles.managerbgHFM,
+        styles.managerbgBMC,
+        styles.managerbgPNX,
+        styles.bodyDefault
+      );
 
-    if (userTeam === "1") {
-      document.body.classList.add(styles.managerbgTMNT);
-    } else if (userTeam === "3") {
-      document.body.classList.add(styles.managerbgDH);
-    } else if (userTeam === "2") {
-      document.body.classList.add(styles.managerbgHFM);
-    } else if (userTeam === "4") {
-      document.body.classList.add(styles.managerbgBMC);
-    } else if (userTeam === "5") {
-      document.body.classList.add(styles.managerbgPNX);
-    }
-  }, [userTeam]);
+      // Проверяем, находится ли пользователь на странице /manager
+      if (pathname.startsWith("/manager")) {
+        // Добавляем класс в зависимости от userTeam
+        if (userTeam === "1") {
+          document.body.classList.add(styles.managerbgTMNT);
+        } else if (userTeam === "2") {
+          document.body.classList.add(styles.managerbgDH);
+        } else if (userTeam === "3") {
+          document.body.classList.add(styles.managerbgHFM);
+        } else if (userTeam === "4") {
+          document.body.classList.add(styles.managerbgBMC);
+        } else if (userTeam === "5") {
+          document.body.classList.add(styles.managerbgPNX);
+        }
+      } else {
+        // Если не на странице /manager, добавляем стандартный класс
+        document.body.classList.add(styles.bodyDefault);
+      }
+
+      // Очистка при размонтировании компонента
+      return () => {
+        document.body.classList.remove(
+          styles.managerbgTMNT,
+          styles.managerbgDH,
+          styles.managerbgHFM,
+          styles.managerbgBMC,
+          styles.managerbgPNX,
+          styles.bodyDefault
+        );
+      };
+    }, [userTeam, pathname]);
 
   useEffect(() => {
     const fetchTeamData = async () => {
@@ -74,25 +97,22 @@ export function TeamTotalStat() {
     fetchTeamData();
   }, [id, userTeam]);
 
-  // New effect to fetch totals data
   useEffect(() => {
     const fetchTotalsData = async () => {
-      const response = await fetch(`/api/teams/totals/${id}`); // Fetch totals data
+      const response = await fetch(`/api/teams/totals/${id}`);
       const data = await response.json();
       if (response.ok) {
-        // Extract name and totals from the response
         const totalsArray: ITotalsData[] = data.team.members.map(
           (member: IMember) => ({
             name: member.name,
-            totals: member.stats[0]?.totals || 0, // Get totals or default to 0 if no stats
+            totals: member.stats[0]?.totals || 0,
           })
         );
-        setTotalsData(totalsArray); // Update the totals data state
+        setTotalsData(totalsArray);
       }
     };
 
     if (userTeam) {
-      // Only fetch totals data if userTeam is available
       fetchTotalsData();
     }
   }, [userTeam, id]);
