@@ -79,3 +79,21 @@ interface IMember {
 interface ITotalTeam {
   members: IMember[];
 }
+
+interface ITotalStat {
+  date: string;
+  totals: number;
+}
+
+interface IUsdRecord {
+  value: number;
+  isPay: boolean;
+}
+
+interface ITotalMember {
+  id: string;
+  name: string;
+  totalSum: number;
+  monthlyTotals: { month: string; total: number }[];
+  usdRecords: UsdRecord[];
+}

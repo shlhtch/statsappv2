@@ -14,7 +14,7 @@ export default function TeamsPage() {
     }, []);
     
   return (
-    <div className="font-montserratAlternates py-2">
+    <div className="font-montserratAlternates py-2 text-white  bg-[#1C1C1E] min-h-screen">
       <DetailStatsControl />
     </div>
   );

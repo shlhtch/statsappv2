@@ -33,6 +33,12 @@ export async function GET() {
             member.stats.forEach((stat) => {
               const totalsValue = stat.totals || 0;
               totalSum += totalsValue;
+
+              const monthKey = new Date(stat.date).toISOString().slice(0, 7);
+              if (!monthlyTotals[monthKey]) {
+                monthlyTotals[monthKey] = 0;
+              }
+              monthlyTotals[monthKey] += totalsValue;
             });
 
             const monthlyTotalsArray = Object.entries(monthlyTotals).map(
@@ -67,11 +73,13 @@ export async function GET() {
                 });
               }
             }
+
             for (const record of existingRecords) {
               if (record.value > totalSum) {
                 await prisma.usd.delete({ where: { id: record.id } });
               }
             }
+
             const usdRecords = await prisma.usd.findMany({
               where: {
                 user_id: member.id,
@@ -95,7 +103,7 @@ export async function GET() {
     const errorMessage =
       error instanceof Error ? error.message : "Неизвестная ошибка";
     return NextResponse.json(
-      { error: "Ошибка при получении отчетов", details: errorMessage }, 
+      { error: "Ошибка при получении отчетов", details: errorMessage },
       { status: 500 }
     );
   }
