@@ -21,6 +21,7 @@ model users {
   team       teams?   @relation(fields: [team_id], references: [id])
   team_id     Int?
   stats      stats[]
+  usd         usd[]
   created_at DateTime @default(now())
   updated_at DateTime? @updatedAt
   role       Role     @default(MANAGER)
@@ -57,6 +58,18 @@ model stats {
   @@unique([user_id, date])
 }
 
+model usd {
+  id       Int     @id @default(autoincrement())
+  user_id  Int
+  value    Int     @default(10)
+  status   Boolean @default(false)
+  isPay    Boolean @default(false)
+  user     users   @relation(fields: [user_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime? @updatedAt
+
+  @@unique([user_id, value])
+}
 
 enum Role {
   ADMIN

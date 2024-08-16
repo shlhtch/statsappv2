@@ -65,7 +65,8 @@ interface ITotalsData {
 
 interface IUSD {
   value: number;
-  status: number;
+  status: boolean; // Изменено на boolean
+  isPay: boolean; // Добавлено
 }
 
 interface IMember {
