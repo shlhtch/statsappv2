@@ -9,3 +9,8 @@ body {
 body.manager-bg {
   background: #f0f0f0;
 }
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Примените цвет или фильтр */
+}

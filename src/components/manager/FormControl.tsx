@@ -4,6 +4,7 @@ import { useInitData } from '@telegram-apps/sdk-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from "react";
 
+
 const FormControl: React.FC = () => {
   const initData = useInitData();
   const id = initData?.user?.id;
@@ -147,7 +148,7 @@ const FormControl: React.FC = () => {
           Отчет
         </h2>
         <div>
-          <label className="block text-white font-montserratAlternates font-normal text-[13px]">
+          <label className="block px-1 py-1 text-white font-montserratAlternates font-normal text-[13px]">
             Дата
           </label>
           <input
@@ -159,7 +160,7 @@ const FormControl: React.FC = () => {
           {error && <p className="text-red-500 mt-1">{error}</p>}
         </div>
         <div>
-          <label className="block text-white font-montserratAlternates font-normal text-[14px]">
+          <label className="block px-1 py-1 text-white font-montserratAlternates font-normal text-[14px]">
             Менеджер
           </label>
           <select
@@ -178,7 +179,7 @@ const FormControl: React.FC = () => {
           </select>
         </div>
         <div>
-          <label className="block text-white font-montserratAlternates font-normal text-[14px]">
+          <label className="block px-1 py-1 text-white font-montserratAlternates font-normal text-[14px]">
             Количество депов
           </label>
           <input
@@ -194,7 +195,7 @@ const FormControl: React.FC = () => {
           )}
         </div>
         <div>
-          <label className="block text-white font-montserratAlternates font-normal text-[14px]">
+          <label className="block px-1 py-1 text-white font-montserratAlternates font-normal text-[14px]">
             Количество додепов
           </label>
           <input
@@ -210,7 +211,7 @@ const FormControl: React.FC = () => {
           )}
         </div>
         <div>
-          <label className="block text-white font-montserratAlternates font-normal text-[14px]">
+          <label className="block px-1 py-1 text-white font-montserratAlternates font-normal text-[14px]">
             Tir1
           </label>
           <input
@@ -228,7 +229,7 @@ const FormControl: React.FC = () => {
           )}
         </div>
         <div>
-          <label className="block text-white font-montserratAlternates font-normal text-[14px]">
+          <label className="block px-1 py-1 text-white font-montserratAlternates font-normal text-[14px]">
             Tir2
           </label>
           <input
@@ -246,7 +247,7 @@ const FormControl: React.FC = () => {
           )}
         </div>
         <div>
-          <label className="block text-white font-montserratAlternates font-normal text-[14px]">
+          <label className="block px-1 py-1 text-white font-montserratAlternates font-normal text-[14px]">
             Отчет
           </label>
           <textarea
