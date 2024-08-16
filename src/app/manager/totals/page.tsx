@@ -1,5 +1,9 @@
-"use client";
+import TotalsControl from '@/components/manager/TotalsControl';
 
 export default function TotalsPage() {
-  return <div>Итого</div>;
+  return (
+    <div>
+      <TotalsControl/>
+    </div>
+  )
 }

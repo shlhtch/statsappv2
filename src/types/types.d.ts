@@ -62,3 +62,19 @@ interface ITotalsData {
   name: string;
   totals: number;
 }
+
+interface IUSD {
+  value: number;
+  status: number;
+}
+
+interface IMember {
+  name: string;
+  stats: { date: string; totals: number }[];
+  usd: Record<string, IUSD>;
+  totals: { month: string; total: number }[];
+}
+
+interface ITotalTeam {
+  members: IMember[];
+}

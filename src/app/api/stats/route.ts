@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     }: {
       date: string;
       user_id: number;
-      deposits: number; // может быть 0
+      deposits: number;
       redeposits: number;
       tir1: number;
       tir2: number | null;
