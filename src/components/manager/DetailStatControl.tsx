@@ -121,13 +121,13 @@ const DetailStatsControl: React.FC = () => {
   const bgColor = () => {
     switch (userTeam) {
       case "1":
-        return "bg-[#CFA3F2]";
+        return "bg-[#461799]";
       case "2":
-        return "bg-[#064040]";
+        return "bg-[#012B7D]";
       case "3":
         return "bg-[#904636]";
       case "4":
-        return "bg-[#0052B3]";
+        return "bg-[#064040]";
       case "5":
         return "bg-[#8D7F7B]";
       default:

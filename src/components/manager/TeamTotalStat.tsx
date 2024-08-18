@@ -39,7 +39,6 @@ export function TeamTotalStat() {
   }, [id]);
 
     useEffect(() => {
-      // Удаляем все классы
       document.body.classList.remove(
         styles.managerbgTMNT,
         styles.managerbgDH,
@@ -49,9 +48,7 @@ export function TeamTotalStat() {
         styles.bodyDefault
       );
 
-      // Проверяем, находится ли пользователь на странице /manager
       if (pathname.startsWith("/manager")) {
-        // Добавляем класс в зависимости от userTeam
         if (userTeam === "1") {
           document.body.classList.add(styles.managerbgTMNT);
         } else if (userTeam === "2") {
@@ -64,11 +61,9 @@ export function TeamTotalStat() {
           document.body.classList.add(styles.managerbgPNX);
         }
       } else {
-        // Если не на странице /manager, добавляем стандартный класс
         document.body.classList.add(styles.bodyDefault);
       }
 
-      // Очистка при размонтировании компонента
       return () => {
         document.body.classList.remove(
           styles.managerbgTMNT,
@@ -122,13 +117,13 @@ export function TeamTotalStat() {
       case "1":
         return "bg-[#CFA3F2]";
       case "2":
-        return "bg-[#064040]";
+        return "bg-[#012B7D] text-white";
       case "3":
-        return "bg-[#904636]";
+        return "bg-[#904636] text-white";
       case "4":
-        return "bg-[#0052B3]";
+        return "bg-[#064040] text-white";
       case "5":
-        return "bg-[#8D7F7B]";
+        return "bg-[#B2B2B2]";
       default:
         return "bg-[#AE0900]";
     }

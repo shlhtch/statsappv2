@@ -42,9 +42,9 @@ export default function NavBar(){
     } else if (userTeam === "3") {
       return isActive ? "text-[#904636]" : "text-[#BAD7D6]";
     } else if (userTeam === "2") {
-      return isActive ? "text-[#29B298]" : "text-[#BAD7D6]";
+      return isActive ? "text-[#012B7D]" : "text-[#BAD7D6]";
     } else if (userTeam === "4") {
-      return isActive ? "text-[#0052B3]" : "text-[#BAD7D6]";
+      return isActive ? "text-[#064040]" : "text-[#BAD7D6]";
     } else if (userTeam === "5") {
       return isActive ? "text-[#8D7F7B]" : "text-[#BAD7D6]";
     } else {
@@ -58,7 +58,7 @@ export default function NavBar(){
     } else if (userTeam === "3") {
       return "#CB4E07";
     } else if (userTeam === "2") {
-      return "#29B298";
+      return "#012B7D";
     } else if (userTeam === "4") {
       return "#0052B3";
     } else if (userTeam === "5") {
@@ -74,9 +74,9 @@ export default function NavBar(){
     } else if (userTeam === "3") {
       return "#CB4E07";
     } else if (userTeam === "2") {
-      return "#29B298";
+      return "#012B7D";
     } else if (userTeam === "4") {
-      return "#0052B3";
+      return "#064040";
     } else if (userTeam === "5") {
       return "#8D7F7B";
     } else {
