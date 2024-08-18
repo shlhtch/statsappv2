@@ -52,36 +52,36 @@ export default function AdminBar() {
         alt="Navbar Background"
         className="w-full h-auto"
       />
-      <div className="absolute inset-0 flex justify-center items-center">
-        <Link href="/admin" className="mx-4">
+      <div className="absolute inset-0 flex justify-left items-center">
+        <Link href="/admin" className="mx-7">
           <Icon
             icon="ant-design:file-text-filled"
-            width="24"
-            height="24"
+            width="28"
+            height="28"
             className={getClassName(isAdminActive)}
           />
         </Link>
-        <Link href="/admin/points" className="mx-4">
+        <Link href="/admin/points" className="mx-6">
           <Icon
             icon="ant-design:frown-filled"
-            width="24"
-            height="24"
+            width="28"
+            height="28"
             className={getClassName(isAdminPointsActive)}
           />
         </Link>
-        <Link href="/admin/totals" className="mx-4">
+        <Link href="/admin/totals" className="mx-6">
           <Icon
             icon="ant-design:smile-filled"
-            width="24"
-            height="24"
+            width="28"
+            height="28"
             className={getClassName(isAdminTotalsActive)}
           />
         </Link>
-        <Link href="/admin/usd" className="mx-4">
+        <Link href="/admin/usd" className="mx-6">
           <Icon
             icon="ant-design:dollar-circle-filled"
-            width="24"
-            height="24"
+            width="28"
+            height="28"
             className={getClassName(isUsdActive)}
           />
         </Link>
