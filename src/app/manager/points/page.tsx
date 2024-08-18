@@ -1,9 +1,13 @@
 import PointsControl from '@/components/manager/PointsControl';
+import styles from "../manager.module.css";
 
 export default function PointsPage() {
 
 	return (
-    <div className="font-montserratAlternates text-white bg-[#1C1C1E] min-h-screen">
+    <div
+      className={`${styles.bodyDefault} font-montserratAlternates`}
+      style={{ minHeight: "100vh" }}
+    >
       <PointsControl />
     </div>
   );

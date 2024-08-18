@@ -226,7 +226,7 @@ const PointsControl = () => {
                 type="date"
                 onChange={(e) => setSelectedDate(e.target.value)}
                 value={selectedDate}
-                className="p-2 w-full bg-[#2F313B] rounded-xl text-center font-medium text-[14px]"
+                className="p-2 w-full bg-[#2F313B] rounded-xl text-center font-medium text-[14px] text-white"
               />
             </div>
           </div>
@@ -267,10 +267,10 @@ const PointsControl = () => {
       </div>
       <div
         className={`overflow-y-auto bg-[#2F313B] rounded-xl ${
-          filteredData.length <= 5 ? "h-auto" : "h-[355px]"
+          filteredData.length <= 4 ? "h-auto" : "h-[335px]"
         }`}
       >
-        <table className="min-w-full">
+        <table className="min-w-full text-white">
           <thead>
             <tr>
               {headers.map((header, index) => (

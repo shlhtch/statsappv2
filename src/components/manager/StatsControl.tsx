@@ -244,7 +244,7 @@ const StatsControl = () => {
       </div>
       <div
         className={`overflow-y-auto bg-[#2F313B] rounded-xl ${
-          filteredData.length <= 5 ? "h-auto" : "h-[355px]"
+          filteredData.length <= 4 ? "h-auto" : "h-[355px]"
         }`}
       >
         <table className="min-w-full">

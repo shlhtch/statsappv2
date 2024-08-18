@@ -7,9 +7,7 @@ export default function ManagerLayout({ children }: PropsWithChildren) {
       <div className="fixed bottom-3 px-4">
         <NavBar />
       </div>
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
     </div>
   );
 }

@@ -1,8 +1,12 @@
 import FormControl from '@/components/manager/FormControl';
+import styles from '../manager.module.css'
 
 export default function PointsPage() {
   return (
-    <div className="text-white bg-[#1C1C1E] min-h-screen">
+    <div
+      className={`${styles.bodyDefault} font-montserratAlternates`}
+      style={{ minHeight: "100vh" }}
+    >
       <FormControl />
     </div>
   );

@@ -136,7 +136,7 @@ const DetailStatsControl: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#2F313B] h-[1000px] p-4 rounded-md mx-2">
+    <div className="bg-[#1C1C1E] h-[1000px] p-4 rounded-md mx-2">
       <h2 className="text-white text-lg mb-2">{userName}</h2>
       <h3 className="text-white text-md mb-4">{userRole}</h3>
       <div className="h-[500px] overflow-y-auto pb-28">

@@ -1,9 +1,12 @@
 import StatsControl from '@/components/manager/StatsControl';
-
+import styles from "../manager.module.css";
 
 export default function StatsPage() {
   return (
-    <div className="font-montserratAlternates text-white bg-[#1C1C1E] min-h-screen">
+    <div
+      className={`${styles.bodyDefault} font-montserratAlternates text-white`}
+      style={{ minHeight: "100vh" }}
+    >
       <StatsControl />
     </div>
   );

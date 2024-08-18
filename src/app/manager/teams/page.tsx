@@ -2,6 +2,7 @@
 
 import DetailStatsControl from '@/components/manager/DetailStatControl';
 import { useEffect } from 'react';
+import styles from "../manager.module.css";
 
 export default function TeamsPage() {
 
@@ -14,7 +15,10 @@ export default function TeamsPage() {
     }, []);
     
   return (
-    <div className="font-montserratAlternates py-2 text-white  bg-[#1C1C1E] min-h-screen">
+    <div
+      className={`${styles.bodyDefault} font-montserratAlternates text-white py-2`}
+      style={{ minHeight: "100vh" }}
+    >
       <DetailStatsControl />
     </div>
   );
