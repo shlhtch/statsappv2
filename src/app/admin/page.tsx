@@ -7,7 +7,7 @@ export default function AdminPage() {
 
   return (
     <div
-      className={`${styles.bodyDefault} font-montserratAlternates`}
+      className={`${styles.bodyDefault} font-montserratAlternates text-white`}
       style={{ minHeight: "100vh" }}
     >
       <AdminStatsControl />

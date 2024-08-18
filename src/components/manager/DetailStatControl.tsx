@@ -229,34 +229,38 @@ const DetailStatsControl: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <div className="ml-4 flex-1">
-                <textarea
-                  className="w-full h-24 bg-[#3A3E47] text-white p-2 border-none resize-none"
-                  value={
-                    editingIndex === index
-                      ? stat.comment
-                      : stat.comment || "Без отчета"
-                  }
-                  onChange={(e) =>
-                    handleChange(index, "comment", e.target.value)
-                  }
-                  readOnly={editingIndex !== index}
-                />
-                {editingIndex === index ? (
-                  <button
-                    onClick={() => handleSave(index)}
-                    className="py-3 bg-green-600 text-white w-full px-4 rounded-xl hover:bg-green-500"
-                  >
-                    Сохранить
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleEdit(index)}
-                    className={`py-3 text-white w-full px-4 rounded-xl ${bgColor()} hover:bg-opacity-80`}
-                  >
-                    Изменить
-                  </button>
-                )}
+              <div className="ml-4">
+                <div className="flex-1">
+                  <textarea
+                    className="w-full h-24 bg-[#3A3E47] text-white p-2 border-none resize-none"
+                    value={
+                      editingIndex === index
+                        ? stat.comment
+                        : stat.comment || "Без отчета"
+                    }
+                    onChange={(e) =>
+                      handleChange(index, "comment", e.target.value)
+                    }
+                    readOnly={editingIndex !== index}
+                  />
+                </div>
+                <div className="mt-2">
+                  {editingIndex === index ? (
+                    <button
+                      onClick={() => handleSave(index)}
+                      className="py-3 bg-green-600 text-white w-full px-4 rounded-xl hover:bg-green-500"
+                    >
+                      Сохранить
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleEdit(index)}
+                      className={`py-3 text-white w-full px-4 rounded-xl ${bgColor()} hover:bg-opacity-80`}
+                    >
+                      Изменить
+                    </button>
+                  )}
+                </div>
               </div>
             </li>
           ))}

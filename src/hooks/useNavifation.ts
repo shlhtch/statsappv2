@@ -11,6 +11,11 @@ const useNavigation = () => {
   const [isNotificationsActive, setIsNotificationsActive] = useState(false);
   const [isMessagesActive, setIsMessagesActive] = useState(false);
   const [isTeamsActive, setIsTeamsActive] = useState(false);
+  const [isAdminActive, setIsAdminActive] = useState(false);
+  const [isAdminStatsActive, setIsAdminStatsActive] = useState(false);
+  const [isAdminPointsActive, setIsAdminPointsActive] = useState(false);
+  const [isAdminTotalsActive, setIsAdminTotalsActive] = useState(false);
+  const [isUsdActive, setIsUsdActive] = useState(false);
 
   useEffect(() => {
     setIsHomeActive(false);
@@ -18,6 +23,11 @@ const useNavigation = () => {
     setIsNotificationsActive(false);
     setIsMessagesActive(false);
     setIsTeamsActive(false);
+    setIsAdminActive(false)
+    setIsAdminStatsActive(false);
+    setIsAdminPointsActive(false);
+    setIsAdminTotalsActive(false);
+    setIsUsdActive(false);
 
     switch (pathname) {
       case "/manager/points":
@@ -35,6 +45,21 @@ const useNavigation = () => {
       case "/manager/teams":
         setIsTeamsActive(true);
         break;
+      case "/admin":
+        setIsAdminActive(true);
+        break;
+      case "/admin/stats":
+        setIsAdminStatsActive(true);
+        break;
+      case "/admin/points":
+        setIsAdminPointsActive(true);
+        break;
+      case "/admin/totals":
+        setIsAdminTotalsActive(true);
+        break;
+      case "/admin/usd":
+        setIsUsdActive(true);
+        break;
       default:
         break;
     }
@@ -46,6 +71,11 @@ const useNavigation = () => {
     isNotificationsActive,
     isMessagesActive,
     isTeamsActive,
+    isAdminActive,
+    isAdminStatsActive,
+    isAdminPointsActive,
+    isAdminTotalsActive,
+    isUsdActive,
   };
 };
 
