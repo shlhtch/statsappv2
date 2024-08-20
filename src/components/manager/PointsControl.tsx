@@ -267,7 +267,7 @@ const PointsControl = () => {
       </div>
       <div
         className={`overflow-y-auto bg-[#2F313B] rounded-xl ${
-          filteredData.length <= 4 ? "h-auto" : "h-[335px]"
+          filteredData.length <= 4 ? "h-auto" : "h-[350px]"
         }`}
       >
         <table className="min-w-full text-white">

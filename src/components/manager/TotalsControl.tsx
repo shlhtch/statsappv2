@@ -73,10 +73,10 @@ const TotalsControls: React.FC = () => {
               <div className="text-[14px]">{member.name}</div>
             </div>
             {openMember === member.id.toString() && (
-              <div className="cursor-pointer border-b border-gray-500 text-[14px]">
+              <div className="p-4 rounded-b-lg bg-[#2F313B] border-t border-gray-500">
                 <div className="mb-2">
                   <span
-                    className="cursor-pointer border-b border-gray-500"
+                    className="cursor-pointer border-b border-gray-500 text-[14px]"
                     onClick={() =>
                       setOpenTotalSum(
                         openTotalSum === member.id.toString()
@@ -89,7 +89,7 @@ const TotalsControls: React.FC = () => {
                   </span>
                 </div>
                 {openTotalSum === member.id.toString() && (
-                  <div className="grid grid-cols-4 gap-2 text-[14px]">
+                  <div className="grid grid-cols-4 gap-2 text-[12px]">
                     {member.usdRecords.map((record, index) => (
                       <div
                         key={record.id}
@@ -97,7 +97,7 @@ const TotalsControls: React.FC = () => {
                           record.isPay ? "bg-[#06EE5F]" : "bg-[#FF3B30]"
                         }`}
                       >
-                        {index + 1}: 10USD
+                        <div className='text-[14px]'>{index + 1}: 10USD</div>
                       </div>
                     ))}
                   </div>
@@ -105,9 +105,7 @@ const TotalsControls: React.FC = () => {
                 <div className="mt-2">
                   {member.monthlyTotals.map((monthTotal) => (
                     <div key={monthTotal.month} className="mb-1">
-                      <div className="text-[14px]">
-                        {getMonthName(monthTotal.month)}: {monthTotal.total}
-                      </div>
+                      <div className='text-[14px]'>{getMonthName(monthTotal.month)}: {monthTotal.total}</div>
                     </div>
                   ))}
                 </div>
