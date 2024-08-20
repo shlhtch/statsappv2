@@ -1,5 +1,5 @@
-"use client";
 
+import AdminPoints from '@/components/admin/AdminPointsControl';
 import styles from "../admin.module.css";
 
 export default function AdminPointsPage() {
@@ -8,7 +8,7 @@ export default function AdminPointsPage() {
       className={`${styles.bodyDefault} font-montserratAlternates text-white`}
       style={{ minHeight: "100vh" }}
     >
-      Тут ставить минус баллы
+      <AdminPoints/>
     </div>
   );
 }

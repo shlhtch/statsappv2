@@ -53,7 +53,7 @@ interface ITeamOption {
 interface ITeamData {
   id: number;
   title: string;
-  members: IMember[]; // Changed to IMember[]
+  members: IMember[];
   totalMembers: number;
   previousDate: string;
 }
@@ -65,8 +65,8 @@ interface ITotalsData {
 
 interface IUSD {
   value: number;
-  status: boolean; // Изменено на boolean
-  isPay: boolean; // Добавлено
+  status: boolean;
+  isPay: boolean;
 }
 
 interface IMember {
@@ -96,4 +96,10 @@ interface ITotalMember {
   totalSum: number;
   monthlyTotals: { month: string; total: number }[];
   usdRecords: UsdRecord[];
+}
+
+interface IAdminStat {
+  firtsminus: number;
+  secondminus: number;
+  thirdminus: number;
 }

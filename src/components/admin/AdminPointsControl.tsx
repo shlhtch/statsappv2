@@ -1,0 +1,369 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Select, { SingleValue, StylesConfig } from "react-select";
+
+interface Stat {
+  id: number;
+  date: string;
+  user_id: number;
+  firtsminus: number;
+  secondminus: number;
+  thirdminus: number;
+}
+
+interface Member {
+  id: number;
+  name: string;
+  stats: Stat[];
+}
+
+interface Team {
+  id: number;
+  title: string;
+  members: Member[];
+}
+
+interface IMemberOption {
+  value: number;
+  label: string;
+}
+
+interface ITeamOption {
+  value: number;
+  label: string;
+}
+
+const customStylesTeams: StylesConfig<ITeamOption> = {
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: "0.75rem",
+    backgroundColor: "#2F313B",
+    position: "absolute",
+  }),
+  control: (provided, state) => ({
+    ...provided,
+    borderRadius: "0.75rem",
+    backgroundColor: "#2F313B",
+    borderColor: "transparent",
+    boxShadow: state.isFocused ? "0 0 0 1px #A8B4CE" : "none",
+    height: "42px",
+    minHeight: "42px",
+    "&:hover": {
+      borderColor: state.isFocused ? "#A8B4CE" : "transparent",
+    },
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "white",
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: "white",
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    color: "white",
+    padding: 0,
+  }),
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    backgroundColor: isSelected ? "#A8B4CE" : isFocused ? "#3A3F47" : "#2F313B",
+    color: "white",
+    padding: "10px",
+    borderBottom: "1px solid #4B5563",
+    "&:last-child": {
+      borderBottom: "none",
+    },
+    "&:hover": {
+      backgroundColor: "#3A3F47",
+    },
+  }),
+};
+
+const customStylesManager: StylesConfig<IMemberOption> = {
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: "0.75rem",
+    backgroundColor: "#2F313B",
+    position: "absolute",
+  }),
+  control: (provided, state) => ({
+    ...provided,
+    borderRadius: "0.75rem",
+    backgroundColor: "#2F313B",
+    borderColor: "transparent",
+    boxShadow: state.isFocused ? "0 0 0 1px #A8B4CE" : "none",
+    height: "42px",
+    minHeight: "42px",
+    "&:hover": {
+      borderColor: state.isFocused ? "#A8B4CE" : "transparent",
+    },
+    color: "white",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "white",
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: "white",
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    color: "white",
+    padding: 0,
+    borderRadius: "0.75rem",
+  }),
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    backgroundColor: isSelected ? "#A8B4CE" : isFocused ? "#3A3F47" : "#2F313B",
+    color: "white",
+    padding: "10px",
+    borderBottom: "1px solid #4B5563",
+    "&:last-child": {
+      borderBottom: "none",
+    },
+    "&:hover": {
+      backgroundColor: "#3A3F47",
+    },
+  }),
+  input: (provided) => ({
+    ...provided,
+    color: "white",
+  }),
+};
+
+const AdminPoints = () => {
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [selectedTeam, setSelectedTeam] = useState<string>("");
+  const [selectedMember, setSelectedMember] = useState<string>("");
+  const [filterDate, setFilterDate] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [editStatId, setEditStatId] = useState<number | null>(null);
+  const [firtsminus, setFirtsminus] = useState<number | undefined>(undefined);
+  const [secondminus, setSecondminus] = useState<number | undefined>(undefined);
+  const [thirdminus, setThirdminus] = useState<number | undefined>(undefined);
+
+  const fetchTeams = async () => {
+    setLoading(true);
+    try {
+      const formattedDate = filterDate
+        ? formatDateToDDMMYYYY(filterDate)
+        : null;
+      const response = await axios.get("/api/stats/admin/points", {
+        params: {
+          id: selectedTeam === "0" ? undefined : selectedTeam,
+          memberId: selectedMember === "0" ? undefined : selectedMember,
+          date: formattedDate,
+        },
+      });
+      setTeams(response.data);
+    } catch (error) {
+      console.error("Error fetching teams:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatDateToDDMMYYYY = (date: string) => {
+    const [year, month, day] = date.split("-");
+    return `${day}-${month}-${year}`;
+  };
+
+  const handleUpdate = async () => {
+    if (editStatId !== null) {
+      try {
+        const response = await axios.patch("/api/stats/admin/points", {
+          id: editStatId,
+          firtsminus,
+          secondminus,
+          thirdminus,
+        });
+        console.log("Updated stat:", response.data);
+        fetchTeams();
+        resetEditState();
+      } catch (error) {
+        console.error("Error updating stat:", error);
+      }
+    }
+  };
+
+  const resetEditState = () => {
+    setEditStatId(null);
+    setFirtsminus(undefined);
+    setSecondminus(undefined);
+    setThirdminus(undefined);
+  };
+
+  useEffect(() => {
+    fetchTeams();
+  }, [selectedTeam, selectedMember, filterDate]);
+
+  const teamOptions: ITeamOption[] = [
+    { value: 0, label: "Все команды" },
+    ...teams.map((team) => ({
+      value: team.id,
+      label: team.title,
+    })),
+  ];
+
+  const memberOptions: IMemberOption[] = [
+    { value: 0, label: "Все менеджеры" },
+    ...teams.flatMap((team) =>
+      team.members.map((member) => ({
+        value: member.id,
+        label: member.name,
+      }))
+    ),
+  ];
+
+  return (
+    <div className="px-4">
+      <div className="py-5">
+        <div className="grid grid-cols-2 gap-2 mb-3">
+          <div>
+            <input
+              type="date"
+              onChange={(e) => setFilterDate(e.target.value)}
+              value={filterDate}
+              className="p-2 w-full bg-[#2F313B] rounded-xl text-center"
+            />
+          </div>
+          <div>
+            <Select<IMemberOption, false>
+              options={memberOptions}
+              onChange={(option: SingleValue<IMemberOption>) => {
+                if (option) {
+                  setSelectedMember(option.value.toString());
+                } else {
+                  setSelectedMember("");
+                }
+              }}
+              styles={customStylesManager}
+              placeholder="Менеджер"
+              className="rounded-xl text-center"
+              isSearchable={true}
+            />
+          </div>
+        </div>
+        <div>
+          <Select<ITeamOption, false>
+            options={teamOptions}
+            onChange={(option: SingleValue<ITeamOption>) => {
+              if (option) {
+                setSelectedTeam(option.value.toString());
+              } else {
+                setSelectedTeam("");
+              }
+            }}
+            styles={customStylesTeams}
+            placeholder="Выберите команду"
+            className=""
+          />
+        </div>
+      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="overflow-y-auto max-h-[350px] p-4 space-y-4">
+          {teams.map((team) => (
+            <div
+              key={team.id}
+              className="border p-4 rounded-lg bg-[#3A3E47] shadow-md"
+            >
+              {team.members.map((member) => (
+                <div
+                  key={member.id}
+                  className="border-b last:border-b-0 mb-4 pb-4"
+                >
+                  <h3 className="text-lg font-bold mb-2">{member.name}</h3>
+                  {member.stats.map((stat) => (
+                    <div key={stat.id} className="mb-4">
+                      <p className="text-gray-500 mb-2">
+                        Дата: {new Date(stat.date).toLocaleDateString()}
+                      </p>
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block">Беспорядок в СРМ:</label>
+                          <input
+                            type="number"
+                            value={
+                              editStatId === stat.id
+                                ? firtsminus
+                                : stat.firtsminus
+                            }
+                            onChange={(e) =>
+                              setFirtsminus(parseInt(e.target.value))
+                            }
+                            className="border p-2 rounded w-full"
+                            disabled={editStatId !== stat.id}
+                          />
+                        </div>
+                        <div>
+                          <label className="block">Невыполненные задачи:</label>
+                          <input
+                            type="number"
+                            value={
+                              editStatId === stat.id
+                                ? secondminus
+                                : stat.secondminus
+                            }
+                            onChange={(e) =>
+                              setSecondminus(parseInt(e.target.value))
+                            }
+                            className="border p-2 rounded w-full"
+                            disabled={editStatId !== stat.id}
+                          />
+                        </div>
+                        <div>
+                          <label className="block">По согласованию:</label>
+                          <input
+                            type="number"
+                            value={
+                              editStatId === stat.id
+                                ? thirdminus
+                                : stat.thirdminus
+                            }
+                            onChange={(e) =>
+                              setThirdminus(parseInt(e.target.value))
+                            }
+                            className="border p-2 rounded w-full"
+                            disabled={editStatId !== stat.id}
+                          />
+                        </div>
+                        {editStatId === stat.id ? (
+                          <button
+                            onClick={handleUpdate}
+                            className="bg-green-500 text-white p-2 rounded"
+                          >
+                            Изменить
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              setEditStatId(stat.id);
+                              setFirtsminus(stat.firtsminus);
+                              setSecondminus(stat.secondminus);
+                              setThirdminus(stat.thirdminus);
+                            }}
+                            className="bg-yellow-500 text-white p-2 rounded"
+                          >
+                            Редактировать
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AdminPoints;

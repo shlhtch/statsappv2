@@ -41,17 +41,17 @@ export async function GET(
     if (user.role === "ADMIN") {
       const teams = await prisma.teams.findMany({
         where: {
-          ...(teamId && { id: parseInt(teamId, 10) }), // Фильтрация по teamId, если он указан
+          ...(teamId && { id: parseInt(teamId, 10) }),
         },
         include: {
           members: {
             where: {
-              ...(memberId && { id: parseInt(memberId, 10) }), // Фильтрация по memberId
+              ...(memberId && { id: parseInt(memberId, 10) }),
             },
             include: {
               stats: {
                 where: {
-                  ...(formattedDate && { date: formattedDate }), // Фильтрация по дате, если она указана
+                  ...(formattedDate && { date: formattedDate }),
                 },
                 select: {
                   id: true,

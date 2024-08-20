@@ -8,7 +8,7 @@ export default function UsdPage() {
       className={`${styles.bodyDefault} font-montserratAlternates text-white`}
       style={{ minHeight: "100vh" }}
     >
-      Тут 10 usd
+      10usd
     </div>
   );
 }

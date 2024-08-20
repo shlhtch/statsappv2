@@ -49,39 +49,39 @@ export default function AdminBar() {
     <div className={`relative`}>
       <img
         src="/adminbar.svg"
-        alt="Navbar Background"
+        alt="Admin Background"
         className="w-full h-auto"
       />
-      <div className="absolute inset-0 flex justify-left items-center">
-        <Link href="/admin" className="mx-7">
+      <div className="absolute inset-0 flex justify-center items-center">
+        <Link href="/admin" className="mx-4">
           <Icon
             icon="ant-design:file-text-filled"
-            width="28"
-            height="28"
+            width="24"
+            height="24"
             className={getClassName(isAdminActive)}
           />
         </Link>
-        <Link href="/admin/points" className="mx-6">
+        <Link href="/admin/points" className="mx-4">
           <Icon
             icon="ant-design:frown-filled"
-            width="28"
-            height="28"
+            width="24"
+            height="24"
             className={getClassName(isAdminPointsActive)}
           />
         </Link>
-        <Link href="/admin/totals" className="mx-6">
+        <Link href="/admin/totals" className="mx-4">
           <Icon
             icon="ant-design:smile-filled"
-            width="28"
-            height="28"
+            width="24"
+            height="24"
             className={getClassName(isAdminTotalsActive)}
           />
         </Link>
-        <Link href="/admin/usd" className="mx-6">
+        <Link href="/admin/usd" className="mx-4">
           <Icon
             icon="ant-design:dollar-circle-filled"
-            width="28"
-            height="28"
+            width="24"
+            height="24"
             className={getClassName(isUsdActive)}
           />
         </Link>

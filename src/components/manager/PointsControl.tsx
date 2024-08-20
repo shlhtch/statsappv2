@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import Select, { StylesConfig, SingleValue, MultiValue } from "react-select";
+import Select, { StylesConfig, SingleValue } from "react-select";
 
 const PointsControl = () => {
   const [teams, setTeams] = useState<ITeam[]>([]);
