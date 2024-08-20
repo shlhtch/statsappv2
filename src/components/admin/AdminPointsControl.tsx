@@ -205,6 +205,7 @@ const AdminPoints = () => {
 
   useEffect(() => {
     fetchTeams();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTeam, selectedMember, filterDate]);
 
   const teamOptions: ITeamOption[] = [

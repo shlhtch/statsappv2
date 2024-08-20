@@ -1,5 +1,6 @@
 "use client";
 
+import AdminPatchControl from '@/components/admin/AdminPatchControl';
 import styles from "../admin.module.css";
 
 export default function AdminTotalsPage() {
@@ -8,7 +9,7 @@ export default function AdminTotalsPage() {
       className={`${styles.bodyDefault} font-montserratAlternates text-white`}
       style={{ minHeight: "100vh" }}
     >
-      Тут ставить баллы за день
+      <AdminPatchControl/>
     </div>
   );
 }
