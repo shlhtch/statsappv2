@@ -139,12 +139,18 @@ const AdminPoints = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<string>("");
   const [selectedMember, setSelectedMember] = useState<string>("");
-  const [filterDate, setFilterDate] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [editStatId, setEditStatId] = useState<number | null>(null);
   const [firtsminus, setFirtsminus] = useState<number | undefined>(undefined);
   const [secondminus, setSecondminus] = useState<number | undefined>(undefined);
   const [thirdminus, setThirdminus] = useState<number | undefined>(undefined);
+
+  const getYesterdaysDate = () => {
+    const date = new Date();
+    date.setDate(date.getDate() - 1);
+    return date.toISOString().split("T")[0];
+  };
+  const [filterDate, setFilterDate] = useState<string>(getYesterdaysDate());
 
   const fetchTeams = async () => {
     setLoading(true);
@@ -267,99 +273,120 @@ const AdminPoints = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="overflow-y-auto max-h-[350px] p-4 space-y-4">
-          {teams.map((team) => (
-            <div
-              key={team.id}
-              className="border p-4 rounded-lg bg-[#3A3E47] shadow-md"
-            >
-              {team.members.map((member) => (
-                <div
-                  key={member.id}
-                  className="border-b last:border-b-0 mb-4 pb-4"
-                >
-                  <h3 className="text-lg font-bold mb-2">{member.name}</h3>
-                  {member.stats.map((stat) => (
-                    <div key={stat.id} className="mb-4">
-                      <p className="text-gray-500 mb-2">
-                        Дата: {new Date(stat.date).toLocaleDateString()}
-                      </p>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block">Беспорядок в СРМ:</label>
-                          <input
-                            type="number"
-                            value={
-                              editStatId === stat.id
-                                ? firtsminus
-                                : stat.firtsminus
-                            }
-                            onChange={(e) =>
-                              setFirtsminus(parseInt(e.target.value))
-                            }
-                            className="border p-2 rounded w-full"
-                            disabled={editStatId !== stat.id}
-                          />
-                        </div>
-                        <div>
-                          <label className="block">Невыполненные задачи:</label>
-                          <input
-                            type="number"
-                            value={
-                              editStatId === stat.id
-                                ? secondminus
-                                : stat.secondminus
-                            }
-                            onChange={(e) =>
-                              setSecondminus(parseInt(e.target.value))
-                            }
-                            className="border p-2 rounded w-full"
-                            disabled={editStatId !== stat.id}
-                          />
-                        </div>
-                        <div>
-                          <label className="block">По согласованию:</label>
-                          <input
-                            type="number"
-                            value={
-                              editStatId === stat.id
-                                ? thirdminus
-                                : stat.thirdminus
-                            }
-                            onChange={(e) =>
-                              setThirdminus(parseInt(e.target.value))
-                            }
-                            className="border p-2 rounded w-full"
-                            disabled={editStatId !== stat.id}
-                          />
-                        </div>
-                        {editStatId === stat.id ? (
-                          <button
-                            onClick={handleUpdate}
-                            className="bg-green-500 text-white p-2 rounded"
-                          >
-                            Изменить
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => {
-                              setEditStatId(stat.id);
-                              setFirtsminus(stat.firtsminus);
-                              setSecondminus(stat.secondminus);
-                              setThirdminus(stat.thirdminus);
-                            }}
-                            className="bg-yellow-500 text-white p-2 rounded"
-                          >
-                            Редактировать
-                          </button>
-                        )}
-                      </div>
+        <div className="overflow-y-auto max-h-[385px]">
+          {teams.length === 0 ||
+          !teams.some((team) =>
+            team.members.some((member) => member.stats.length > 0)
+          ) ? (
+            <p className="text-gray-500 text-center">Нет данных</p>
+          ) : (
+            teams.map((team) => (
+              <div
+                key={team.id}
+                className="p-2 mb-2 rounded-xl bg-[#2F313B] shadow-md"
+              >
+                {team.members.map((member) => {
+                  const hasStats = member.stats && member.stats.length > 0;
+
+                  return (
+                    <div
+                      key={member.id}
+                      className="bg-[#41434e] rounded-xl px-4 py-2 my-1"
+                    >
+                      <h3 className="text-[14px] font-bold">{member.name}</h3>
+                      {hasStats ? (
+                        member.stats.map((stat) => (
+                          <div key={stat.id}>
+                            <p className="text-[14px] font-bold">
+                              {new Date(stat.date).toLocaleDateString()}
+                            </p>
+                            <div>
+                              <div className="flex items-center py-2">
+                                <label className="block mr-2 text-[14px] w-1/2">
+                                  Беспорядок в СРМ
+                                </label>
+                                <input
+                                  type="number"
+                                  value={
+                                    editStatId === stat.id
+                                      ? firtsminus
+                                      : stat.firtsminus
+                                  }
+                                  onChange={(e) =>
+                                    setFirtsminus(parseInt(e.target.value))
+                                  }
+                                  className="bg-[#2F313B] w-1/5 rounded-sm"
+                                  disabled={editStatId !== stat.id}
+                                />
+                              </div>
+                              <div className="flex items-center mt-2">
+                                <label className="block mr-2 w-1/2 text-[14px]">
+                                  Невыполненные задачи
+                                </label>
+                                <input
+                                  type="number"
+                                  value={
+                                    editStatId === stat.id
+                                      ? secondminus
+                                      : stat.secondminus
+                                  }
+                                  onChange={(e) =>
+                                    setSecondminus(parseInt(e.target.value))
+                                  }
+                                  className="bg-[#2F313B] w-1/5 rounded-sm"
+                                  disabled={editStatId !== stat.id}
+                                />
+                              </div>
+                              <div className="flex items-center mt-2">
+                                <label className="block mr-2 w-1/2 text-[14px]">
+                                  По согласованию
+                                </label>
+                                <input
+                                  type="number"
+                                  value={
+                                    editStatId === stat.id
+                                      ? thirdminus
+                                      : stat.thirdminus
+                                  }
+                                  onChange={(e) =>
+                                    setThirdminus(parseInt(e.target.value))
+                                  }
+                                  className="bg-[#2F313B] w-1/5 rounded-sm"
+                                  disabled={editStatId !== stat.id}
+                                />
+                              </div>
+                              {editStatId === stat.id ? (
+                                <button
+                                  onClick={handleUpdate}
+                                  className="bg-green-500 text-white rounded-xl w-full mt-2 py-1"
+                                >
+                                  Применить
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => {
+                                    setEditStatId(stat.id);
+                                    setFirtsminus(stat.firtsminus);
+                                    setSecondminus(stat.secondminus);
+                                    setThirdminus(stat.thirdminus);
+                                  }}
+                                  className="bg-[#FF67DE] text-white rounded-xl w-full mt-2 py-1"
+                                >
+                                  Изменить
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-gray-500 text-center">Нет данных</p>
+                      )}
                     </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          ))}
+                  );
+                })}
+              </div>
+            ))
+          )}
         </div>
       )}
     </div>
