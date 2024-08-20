@@ -267,7 +267,7 @@ const AdminPoints = () => {
             }}
             styles={customStylesTeams}
             placeholder="Выберите команду"
-            className=""
+            className="text-center"
           />
         </div>
       </div>
@@ -284,7 +284,7 @@ const AdminPoints = () => {
             teams.map((team) => (
               <div
                 key={team.id}
-                className="p-2 mb-2 rounded-xl bg-[#2F313B] shadow-md"
+                className="mb-2 rounded-xl bg-[#2F313B] shadow-md"
               >
                 {team.members.map((member) => {
                   const hasStats = member.stats && member.stats.length > 0;
@@ -292,7 +292,7 @@ const AdminPoints = () => {
                   return (
                     <div
                       key={member.id}
-                      className="bg-[#41434e] rounded-xl px-4 py-2 my-1"
+                      className="bg-[#2F313B] rounded-xl px-4 py-2 my-1"
                     >
                       <h3 className="text-[14px] font-bold">{member.name}</h3>
                       {hasStats ? (
@@ -316,7 +316,7 @@ const AdminPoints = () => {
                                   onChange={(e) =>
                                     setFirtsminus(parseInt(e.target.value))
                                   }
-                                  className="bg-[#2F313B] w-1/5 rounded-sm"
+                                  className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
                                 />
                               </div>
@@ -334,7 +334,7 @@ const AdminPoints = () => {
                                   onChange={(e) =>
                                     setSecondminus(parseInt(e.target.value))
                                   }
-                                  className="bg-[#2F313B] w-1/5 rounded-sm"
+                                  className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
                                 />
                               </div>
@@ -352,7 +352,7 @@ const AdminPoints = () => {
                                   onChange={(e) =>
                                     setThirdminus(parseInt(e.target.value))
                                   }
-                                  className="bg-[#2F313B] w-1/5 rounded-sm"
+                                  className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
                                 />
                               </div>

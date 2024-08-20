@@ -1,5 +1,6 @@
 "use client";
 
+import AdminUsdControls from '@/components/admin/AdminUsdControl';
 import styles from "../admin.module.css";
 
 export default function UsdPage() {
@@ -8,7 +9,7 @@ export default function UsdPage() {
       className={`${styles.bodyDefault} font-montserratAlternates text-white`}
       style={{ minHeight: "100vh" }}
     >
-      10usd
+     <AdminUsdControls/>
     </div>
   );
 }

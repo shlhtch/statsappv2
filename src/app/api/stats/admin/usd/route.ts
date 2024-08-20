@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -107,6 +107,38 @@ export async function GET() {
       error instanceof Error ? error.message : "Неизвестная ошибка";
     return NextResponse.json(
       { error: "Ошибка при получении отчетов", details: errorMessage },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  try {
+    const { id, isPay } = await request.json();
+
+    if (typeof id !== "number" || typeof isPay !== "boolean") {
+      return NextResponse.json(
+        { error: "Invalid data provided." },
+        { status: 400 }
+      );
+    }
+
+    const updatedRecord = await prisma.usd.update({
+      where: {
+        id: id,
+      },
+      data: {
+        isPay: isPay,
+      },
+    });
+
+    return NextResponse.json(updatedRecord);
+  } catch (error) {
+    console.error("Error occurred during PATCH request:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Неизвестная ошибка";
+    return NextResponse.json(
+      { error: "Ошибка при обновлении записи", details: errorMessage },
       { status: 500 }
     );
   }

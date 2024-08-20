@@ -93,7 +93,7 @@ const AdminPatchControl = () => {
         }}
         className="p-2 w-full bg-[#2F313B] rounded-xl text-center"
       />
-      <div className='py-2'>
+      <div className="py-2">
         <div className="overflow-y-auto h-[440px] py-4">
           <div className="grid grid-cols-1 gap-4">
             {teams.map((team) => (
