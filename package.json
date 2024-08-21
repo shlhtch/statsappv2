@@ -6,7 +6,7 @@
     "dev": "next dev -p 4725",
     "dev:https": "next dev --experimental-https -p 4725",
     "build": "next build",
-    "start": "next start -p 4725",
+    "start": "prisma migrate deploy && next start -p 4725",
     "start:prod": "node dist/main",
     "start:migrate:prod": "prisma migrate deploy && pnpm run start:prod",
     "lint": "next lint"
