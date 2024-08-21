@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-//всё поменять!!!!!!!!!!!!!!
+
 export async function GET() {
   try {
     const teams = await prisma.teams.findMany({

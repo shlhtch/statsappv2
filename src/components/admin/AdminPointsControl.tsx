@@ -4,37 +4,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Select, { SingleValue, StylesConfig } from "react-select";
 
-interface Stat {
-  id: number;
-  date: string;
-  user_id: number;
-  firtsminus: number;
-  secondminus: number;
-  thirdminus: number;
-}
-
-interface Member {
-  id: number;
-  name: string;
-  stats: Stat[];
-}
-
-interface Team {
-  id: number;
-  title: string;
-  members: Member[];
-}
-
-interface IMemberOption {
-  value: number;
-  label: string;
-}
-
-interface ITeamOption {
-  value: number;
-  label: string;
-}
-
 const customStylesTeams: StylesConfig<ITeamOption> = {
   menu: (provided) => ({
     ...provided,
@@ -136,7 +105,7 @@ const customStylesManager: StylesConfig<IMemberOption> = {
 };
 
 const AdminPoints = () => {
-  const [teams, setTeams] = useState<Team[]>([]);
+  const [teams, setTeams] = useState<IPointTeam[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<string>("");
   const [selectedMember, setSelectedMember] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);

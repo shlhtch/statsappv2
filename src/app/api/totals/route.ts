@@ -53,7 +53,7 @@ export async function GET() {
                 user_id: member.id,
               },
               orderBy: {
-                created_at: "asc", // Sort by created_at from oldest to newest
+                created_at: "asc",
               },
             });
 
@@ -85,7 +85,7 @@ export async function GET() {
                 user_id: member.id,
               },
               orderBy: {
-                created_at: "asc", // Ensure we sort by created_at here as well
+                created_at: "asc",
               },
             });
 

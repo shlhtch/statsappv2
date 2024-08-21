@@ -52,14 +52,12 @@ export async function GET(
       );
     }
 
-    // Получаем дату вчерашнего дня
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
-    yesterday.setHours(0, 0, 0, 0); // Устанавливаем время на начало дня
+    yesterday.setHours(0, 0, 0, 0);
     const endOfYesterday = new Date(yesterday);
-    endOfYesterday.setHours(23, 59, 59, 999); // Устанавливаем время на конец дня
+    endOfYesterday.setHours(23, 59, 59, 999);
 
-    // Фильтруем статистику для каждого участника
     team.members.forEach((member) => {
       member.stats = member.stats.filter((stat) => {
         const statDate = new Date(stat.date);

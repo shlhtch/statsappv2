@@ -1,5 +1,3 @@
-"use client";
-
 import AdminStatsControl from '@/components/admin/AdminStatsControl';
 import styles from "./admin.module.css";
 

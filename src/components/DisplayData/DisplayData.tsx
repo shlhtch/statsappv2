@@ -1,9 +1,6 @@
 import { isRGB } from "@telegram-apps/sdk-react";
 import { Cell, Checkbox, Section } from "@telegram-apps/telegram-ui";
 import type { FC, ReactNode } from "react";
-
-
-
 import "./styles.css";
 import { Link } from '../Link/Link';
 import { RGB } from '../RGB/RGB';

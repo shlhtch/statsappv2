@@ -1,5 +1,3 @@
-"use client";
-
 import AdminPatchControl from '@/components/admin/AdminPatchControl';
 import styles from "../admin.module.css";
 

@@ -1,14 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-interface Member {
-  id: number;
-  name: string;
-  totalSum: number;
-  monthlyTotals: { month: string; total: number }[];
-  usdRecords: { id: number; value: number; isPay: boolean }[];
-}
-
 const getMonthName = (month: string) => {
   const [year, monthNumber] = month.split("-");
   const months = [
@@ -30,7 +22,7 @@ const getMonthName = (month: string) => {
 };
 
 const AdminUsdControls: React.FC = () => {
-  const [teams, setTeams] = useState<{ members: Member[] }[]>([]);
+  const [teams, setTeams] = useState<{ members: IUsdMember[] }[]>([]);
   const [openMember, setOpenMember] = useState<string | null>(null);
   const [openTotalSum, setOpenTotalSum] = useState<string | null>(null);
 

@@ -1,5 +1,3 @@
-"use client";
-
 import AdminUsdControls from '@/components/admin/AdminUsdControl';
 import styles from "../admin.module.css";
 

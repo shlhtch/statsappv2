@@ -1,25 +1,6 @@
 'use client'
-import { statSync } from 'fs';
+
 import { useEffect, useState } from "react";
-
-interface MemberStat {
-  id: number;
-  date: string;
-  deposits: number;
-  fifthvalue?: number;
-}
-
-interface Member {
-  id: number;
-  name: string;
-  stats: MemberStat[];
-}
-
-interface Team {
-  id: number;
-  title: string;
-  members: Member[];
-}
 
 const AdminPatchControl = () => {
   const [date, setDate] = useState<string>(() => {
@@ -31,7 +12,7 @@ const AdminPatchControl = () => {
     return `${day}-${month}-${year}`;
   });
 
-  const [teams, setTeams] = useState<Team[]>([]);
+  const [teams, setTeams] = useState<IAdminTeam[]>([]);
   const [editableStatId, setEditableStatId] = useState<number | null>(null);
   const [fifthvalue, setFifthValue] = useState<number | undefined>(undefined);
 

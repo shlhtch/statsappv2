@@ -1,4 +1,3 @@
-
 import AdminPoints from '@/components/admin/AdminPointsControl';
 import styles from "../admin.module.css";
 

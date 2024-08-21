@@ -103,3 +103,51 @@ interface IAdminStat {
   secondminus: number;
   thirdminus: number;
 }
+
+interface IAdminMemberStat {
+  id: number;
+  date: string;
+  deposits: number;
+  fifthvalue?: number;
+}
+
+interface IAdminMember {
+  id: number;
+  name: string;
+  stats: IAdminMemberStat[];
+}
+
+interface IAdminTeam {
+  id: number;
+  title: string;
+  members: IAdminMember[];
+}
+
+interface IPointsStat {
+  id: number;
+  date: string;
+  user_id: number;
+  firtsminus: number;
+  secondminus: number;
+  thirdminus: number;
+}
+
+interface IPointsMember {
+  id: number;
+  name: string;
+  stats: IPointsStat[];
+}
+
+interface IPointTeam {
+  id: number;
+  title: string;
+  members: IPointsMember[];
+}
+
+interface IUsdMember {
+  id: number;
+  name: string;
+  totalSum: number;
+  monthlyTotals: { month: string; total: number }[];
+  usdRecords: { id: number; value: number; isPay: boolean }[];
+}
