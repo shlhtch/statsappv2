@@ -252,7 +252,7 @@ const FormControl: React.FC = () => {
           </label>
           <textarea
             value={comment}
-            placeholder="Сегодня я накосячил 3 раза. Сегодня я накосячил 3 раза. Сегодня я накосячил 3 раза."
+            placeholder="Деп не волк, в лес не убежит"
             onChange={(e) => setComment(e.target.value)}
             className="w-full p-2 rounded-xl bg-[#2F313B] text-white border border-gray-600 font-montserratAlternates"
           />
