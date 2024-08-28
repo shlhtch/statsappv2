@@ -276,15 +276,18 @@ const AdminPoints = () => {
                                   Беспорядок в СРМ
                                 </label>
                                 <input
-                                  type="number"
+                                  type="text"
                                   value={
                                     editStatId === stat.id
                                       ? firtsminus
                                       : stat.firtsminus
                                   }
-                                  onChange={(e) =>
-                                    setFirtsminus(parseInt(e.target.value))
-                                  }
+                                  onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^-?\d*$/.test(value)) {
+                    setFirtsminus(value ? parseInt(value) : undefined);
+                  }
+                }}
                                   className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
                                 />
