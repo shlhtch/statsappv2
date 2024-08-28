@@ -285,11 +285,8 @@ const AdminPoints = () => {
                                  onChange={(e) => {
     // Получаем значение ввода
     const inputValue = e.target.value;
-    
-    // Используем регулярное выражение для проверки на допустимые символы
-    if (/^[-+]?\d*$/.test(inputValue)) {
+
       setFirtsminus(parseFloat(inputValue)); // Сохраняем в состоянии только допустимые символы
-    }
   }}
                                   className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
