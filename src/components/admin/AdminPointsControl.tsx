@@ -281,12 +281,10 @@ const AdminPoints = () => {
     value={editStatId === stat.id ? firtsminus : stat.firtsminus}
     onChange={(e) => {
         const newValue = e.target.value;
-        if (newValue === '' || /^-?\d*$/.test(newValue)) {
-            if (newValue === '') {
-                setFirtsminus(undefined);
-            } else {
-                setFirtsminus(parseFloat(newValue));
-            }
+        if (newValue === '') {
+            setFirtsminus(undefined);
+        } else if (/^-?\d*$/.test(newValue) || newValue === '-') {
+            setFirtsminus(newValue === '-' ? undefined : parseFloat(newValue));
         }
     }}
     className="bg-[#41434e] w-1/5 rounded-sm"
