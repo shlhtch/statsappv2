@@ -245,8 +245,7 @@ const AdminPoints = () => {
               type="date"
               onChange={(e) => setFilterDate(e.target.value)}
               value={filterDate}
-              className="p-2 w-full bg-[#2F313B] rounded-xl text-center text-white placeholder-gray-400
-             appearance-none focus:outline-none focus:ring-0"
+              className="p-2 w-full bg-[#2F313B] rounded-xl text-center"
               style={{
                 WebkitAppearance: 'none', // Отключение стандартных стилей Safari
                 MozAppearance: 'none',    // Отключение стандартных стилей Firefox
