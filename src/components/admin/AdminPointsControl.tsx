@@ -275,7 +275,10 @@ const AdminPoints = () => {
                                 <label className="block mr-2 text-[14px] w-1/2">
                                   Беспорядок в СРМ
                                 </label>
-                                <textarea
+                                <input
+                                  type='number'
+                                  min="-100"
+                                  max='100'
                                   value={
                                     editStatId === stat.id
                                       ? firtsminus
