@@ -276,17 +276,21 @@ const AdminPoints = () => {
                                   Беспорядок в СРМ
                                 </label>
                                 <input
-                                  type='number'
-                                  min="-100"
-                                  max='100'
+                                  type='text'
                                   value={
                                     editStatId === stat.id
                                       ? firtsminus
                                       : stat.firtsminus
                                   }
-                                  onChange={(e) =>
-                                    setFirtsminus(parseInt(e.target.value))
-                                  }
+                                  onChange={(e) => {
+    const value = e.target.value;
+    // Проверка на ввод числового значения с возможным минусом
+    if (/^-?\d*$/.test(value)) {
+      // Устанавливаем значение как число или undefined, если пусто
+      setFirtsminus(value === '' ? undefined : parseInt(value));
+    }
+  }}
+
                                   className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
                                 />
