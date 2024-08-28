@@ -277,18 +277,20 @@ const AdminPoints = () => {
                                   Беспорядок в СРМ
                                 </label>
                                 <input
-                                  type='text'
-                                  value={
-                                    editStatId === stat.id
-                                      ? firtsminus
-                                      : stat.firtsminus
-                                  }
-                                  onChange={(e) =>
-                                    setFirtsminus(parseInt(e.target.value))
-                                  }
-                                  className="bg-[#41434e] w-1/5 rounded-sm"
-                                  disabled={editStatId !== stat.id}
-                                />
+  type='text'
+  value={editStatId === stat.id ? firtsminus : stat.firtsminus}
+  onChange={(e) => {
+    const newValue = e.target.value;
+
+    // Регулярное выражение для допуска пустой строки или числа, включая отрицательные
+    if (newValue === '' || /^-?\d*$/.test(newValue)) {
+      // Преобразуем строку в число, или устанавливаем 'undefined', если строка пустая
+      setFirtsminus(newValue === '' ? undefined : parseFloat(newValue));
+    }
+  }}
+    className="bg-[#41434e] w-1/5 rounded-sm"
+    disabled={editStatId !== stat.id}
+/>
                               </div>
                               <div className="flex items-center mt-2">
                                 <label className="block mr-2 w-1/2 text-[14px]">
