@@ -72,6 +72,11 @@ const AdminPatchControl = () => {
           setDate(formattedDate);
         }}
         className="p-2 w-full bg-[#2F313B] rounded-xl text-center"
+        style={{
+                WebkitAppearance: 'none', // Отключение стандартных стилей Safari
+                MozAppearance: 'none',    // Отключение стандартных стилей Firefox
+                appearance: 'none',       // Стандартный вариант для остальных браузеров
+              }}
       />
       <div className="py-2">
         <div className="overflow-y-auto h-[455px] py-4">
