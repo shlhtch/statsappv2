@@ -305,9 +305,9 @@ const AdminPoints = () => {
                                   onChange={(e) => {
         const newValue = e.target.value;
         if (newValue === '') {
-            setFirtsminus(undefined);
+            setSecondminus(undefined);
         } else if (/^-?\d*$/.test(newValue) || newValue === '-') {
-            setFirtsminus(newValue === '-' ? undefined : parseFloat(newValue));
+            setSecondminus(newValue === '-' ? undefined : parseFloat(newValue));
         }
     }}
                                   className="bg-[#41434e] w-1/5 rounded-sm"
@@ -328,9 +328,9 @@ const AdminPoints = () => {
                                  onChange={(e) => {
         const newValue = e.target.value;
         if (newValue === '') {
-            setFirtsminus(undefined);
+            setThirdminus(undefined);
         } else if (/^-?\d*$/.test(newValue) || newValue === '-') {
-            setFirtsminus(newValue === '-' ? undefined : parseFloat(newValue));
+            setThirdminus(newValue === '-' ? undefined : parseFloat(newValue));
         }
     }}
                                   className="bg-[#41434e] w-1/5 rounded-sm"
