@@ -230,6 +230,11 @@ const PointsControl = () => {
                 onChange={(e) => setSelectedDate(e.target.value)}
                 value={selectedDate}
                 className="p-2 w-full bg-[#2F313B] rounded-xl text-center"
+                style={{
+                WebkitAppearance: 'none', // Отключение стандартных стилей Safari
+                MozAppearance: 'none',    // Отключение стандартных стилей Firefox
+                appearance: 'none',       // Стандартный вариант для остальных браузеров
+              }}
               />
             </div>
           </div>
