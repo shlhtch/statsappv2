@@ -105,6 +105,46 @@ const customStylesManager: StylesConfig<IMemberOption> = {
   }),
 };
 
+const customStylesDateInput = {
+  control: (provided: any) => ({
+    ...provided,
+    borderRadius: "0.75rem",
+    backgroundColor: "#2F313B",
+    borderColor: "transparent",
+    boxShadow: "none",
+    height: "42px",
+    minHeight: "42px",
+    display: "flex",
+    alignItems: "center",
+    color: "white",
+  }),
+  input: (provided: any) => ({
+    ...provided,
+    color: "white",
+  }),
+  placeholder: (provided: any) => ({
+    ...provided,
+    color: "white",
+  }),
+  dateInput: {
+    backgroundColor: "#2F313B",
+    color: "white",
+    border: "none",
+    borderRadius: "0.75rem",
+    padding: "10px",
+    height: "42px",
+    width: "100%",
+    textAlign: "center",
+    outline: "none",
+    "&::-webkit-inner-spin-button": {
+      display: "none",
+    },
+    "&::-webkit-calendar-picker-indicator": {
+      display: "none",
+    },
+  },
+};
+
 const AdminPoints = () => {
   const [teams, setTeams] = useState<IPointTeam[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<string>("");
@@ -205,7 +245,13 @@ const AdminPoints = () => {
               type="date"
               onChange={(e) => setFilterDate(e.target.value)}
               value={filterDate}
-              className="p-2 w-full bg-[#2F313B] rounded-xl text-center"
+              className="p-2 w-full bg-[#2F313B] rounded-xl text-center text-white placeholder-gray-400
+             appearance-none focus:outline-none focus:ring-0"
+              style={{
+                WebkitAppearance: 'none', // Отключение стандартных стилей Safari
+                MozAppearance: 'none',    // Отключение стандартных стилей Firefox
+                appearance: 'none',       // Стандартный вариант для остальных браузеров
+              }}
             />
           </div>
           <div>
