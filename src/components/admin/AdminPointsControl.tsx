@@ -296,15 +296,20 @@ const AdminPoints = () => {
                                   Невыполненные задачи
                                 </label>
                                 <input
-                                  type="number"
+                                  type="text"
                                   value={
                                     editStatId === stat.id
                                       ? secondminus
                                       : stat.secondminus
                                   }
-                                  onChange={(e) =>
-                                    setSecondminus(parseInt(e.target.value))
-                                  }
+                                  onChange={(e) => {
+        const newValue = e.target.value;
+        if (newValue === '') {
+            setFirtsminus(undefined);
+        } else if (/^-?\d*$/.test(newValue) || newValue === '-') {
+            setFirtsminus(newValue === '-' ? undefined : parseFloat(newValue));
+        }
+    }}
                                   className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
                                 />
@@ -314,15 +319,20 @@ const AdminPoints = () => {
                                   По согласованию
                                 </label>
                                 <input
-                                  type="number"
+                                  type="text"
                                   value={
                                     editStatId === stat.id
                                       ? thirdminus
                                       : stat.thirdminus
                                   }
-                                  onChange={(e) =>
-                                    setThirdminus(parseInt(e.target.value))
-                                  }
+                                 onChange={(e) => {
+        const newValue = e.target.value;
+        if (newValue === '') {
+            setFirtsminus(undefined);
+        } else if (/^-?\d*$/.test(newValue) || newValue === '-') {
+            setFirtsminus(newValue === '-' ? undefined : parseFloat(newValue));
+        }
+    }}
                                   className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
                                 />
