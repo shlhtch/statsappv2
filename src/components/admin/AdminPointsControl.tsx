@@ -275,19 +275,15 @@ const AdminPoints = () => {
                                 <label className="block mr-2 text-[14px] w-1/2">
                                   Беспорядок в СРМ
                                 </label>
-                                <input
-                                  type="text"
+                                <textarea
                                   value={
                                     editStatId === stat.id
                                       ? firtsminus
                                       : stat.firtsminus
                                   }
-                                 onChange={(e) => {
-    // Получаем значение ввода
-    const inputValue = e.target.value;
-
-      setFirtsminus(parseFloat(inputValue)); // Сохраняем в состоянии только допустимые символы
-  }}
+                                  onChange={(e) =>
+                                    setFirtsminus(parseInt(e.target.value))
+                                  }
                                   className="bg-[#41434e] w-1/5 rounded-sm"
                                   disabled={editStatId !== stat.id}
                                 />
