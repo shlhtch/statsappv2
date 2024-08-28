@@ -282,10 +282,10 @@ const AdminPoints = () => {
                                       ? firtsminus
                                       : stat.firtsminus
                                   }
-                                  onChange={(e) => {
+                                 onChange={(e) => {
                   const value = e.target.value;
                   if (/^-?\d*$/.test(value)) {
-                    setFirtsminus(value ? parseInt(value) : undefined);
+                    setFirtsminus(value === "" ? undefined : parseInt(value));
                   }
                 }}
                                   className="bg-[#41434e] w-1/5 rounded-sm"
