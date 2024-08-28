@@ -12,6 +12,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/input": "^2.2.4",
+    "@nextui-org/system": "^2.2.5",
+    "@nextui-org/theme": "^2.2.9",
     "@prisma/client": "5.18.0",
     "@svgr/webpack": "^8.1.0",
     "@telegram-apps/react-router-integration": "^1.0.0",
@@ -20,6 +23,7 @@
     "@tonconnect/ui-react": "^2.0.5",
     "axios": "^1.7.4",
     "eruda": "^3.0.1",
+    "framer-motion": "^11.3.30",
     "next": "14.2.4",
     "normalize.css": "^8.0.1",
     "react": "^18",

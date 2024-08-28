@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Select, { SingleValue, StylesConfig } from "react-select";
 
+
 const customStylesTeams: StylesConfig<ITeamOption> = {
   menu: (provided) => ({
     ...provided,
@@ -276,7 +277,7 @@ const AdminPoints = () => {
                                   Беспорядок в СРМ
                                 </label>
                                 <input
-                                  type='number'
+                                  type='text'
                                   value={
                                     editStatId === stat.id
                                       ? firtsminus
