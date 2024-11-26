@@ -59,7 +59,12 @@ export function TeamTotalStat() {
           document.body.classList.add(styles.managerbgBMC);
         } else if (userTeam === "5") {
           document.body.classList.add(styles.managerbgPNX);
+        } else if (userTeam === "6") {
+          document.body.classList.add(styles.managerbgPNX);
+        } else if (userTeam === "7") {
+          document.body.classList.add(styles.managerbgPNX);
         }
+        
       } else {
         document.body.classList.add(styles.managerbgPNX);
       }
@@ -71,7 +76,7 @@ export function TeamTotalStat() {
           styles.managerbgHFM,
           styles.managerbgBMC,
           styles.managerbgPNX,
-          // styles.bodyDefault
+          styles.bodyDefault
         );
       };
     }, [userTeam, pathname]);
