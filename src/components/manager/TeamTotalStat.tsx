@@ -45,7 +45,7 @@ export function TeamTotalStat() {
         styles.managerbgHFM,
         styles.managerbgBMC,
         styles.managerbgPNX,
-        styles.bodyDefault
+        // styles.bodyDefault
       );
 
       if (pathname.startsWith("/manager")) {
@@ -61,7 +61,7 @@ export function TeamTotalStat() {
           document.body.classList.add(styles.managerbgPNX);
         }
       } else {
-        document.body.classList.add(styles.bodyDefault);
+        document.body.classList.add(styles.managerbgPNX);
       }
 
       return () => {
@@ -71,7 +71,7 @@ export function TeamTotalStat() {
           styles.managerbgHFM,
           styles.managerbgBMC,
           styles.managerbgPNX,
-          styles.bodyDefault
+          // styles.bodyDefault
         );
       };
     }, [userTeam, pathname]);
