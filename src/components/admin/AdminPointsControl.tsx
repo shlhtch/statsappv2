@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Select, { SingleValue, StylesConfig } from "react-select";
+import { useInitData } from "@telegram-apps/sdk-react";
 
 
 const customStylesTeams: StylesConfig<ITeamOption> = {
@@ -154,6 +155,23 @@ const AdminPoints = () => {
   const [firtsminus, setFirtsminus] = useState<number | undefined>(undefined);
   const [secondminus, setSecondminus] = useState<number | undefined>(undefined);
   const [thirdminus, setThirdminus] = useState<number | undefined>(undefined);
+  const initData = useInitData();
+  const id = initData?.user?.id;
+  
+  useEffect(() => {
+      const fetchTeamMembers = async () => {
+        if (!id) return;
+        try {
+          const response = await fetch(`/api/form/${id}`);
+          const result = await response.json();
+          setSelectedTeam(result.team.id);
+        } catch (error) {
+          console.error("Ошибка получения участников команды:", error);
+        }
+      };
+
+      fetchTeamMembers();
+    }, [id]);
 
   const getYesterdaysDate = () => {
     const date = new Date();
@@ -247,9 +265,9 @@ const AdminPoints = () => {
               value={filterDate}
               className="p-2 w-full bg-[#2F313B] rounded-xl text-center h-[42px]"
               style={{
-                WebkitAppearance: 'none', // Отключение стандартных стилей Safari
-                MozAppearance: 'none',    // Отключение стандартных стилей Firefox
-                appearance: 'none',       // Стандартный вариант для остальных браузеров
+                WebkitAppearance: 'none', 
+                MozAppearance: 'none',    
+                appearance: 'none',     
               }}
             />
           </div>
