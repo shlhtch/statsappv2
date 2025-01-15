@@ -69,23 +69,28 @@ export default function AdminBar() {
             className={getClassName(isAdminPointsActive)}
           />
         </Link>
-        <Link href="/admin/totals" className="mx-4">
-          <Icon
-            icon="ant-design:smile-filled"
-            width="24"
-            height="24"
-            className={getClassName(isAdminTotalsActive)}
-          />
-        </Link>
-        <Link href="/admin/usd" className="mx-4">
-          <Icon
-            icon="ant-design:dollar-circle-filled"
-            width="24"
-            height="24"
-            className={getClassName(isUsdActive)}
-          />
-        </Link>
+        {userTeam && (
+          <>
+            <Link href="/admin/totals" className="mx-4">
+              <Icon
+                icon="ant-design:smile-filled"
+                width="24"
+                height="24"
+                className={getClassName(isAdminTotalsActive)}
+              />
+            </Link>
+            <Link href="/admin/usd" className="mx-4">
+              <Icon
+                icon="ant-design:dollar-circle-filled"
+                width="24"
+                height="24"
+                className={getClassName(isUsdActive)}
+              />
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
+
 }
